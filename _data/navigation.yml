@@ -4,7 +4,7 @@ main:
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
-  # - title: "Sample Posts"
+  #   - title: "Sample Posts"
   #   url: /year-archive/
   - title: "Home"
     url: /
@@ -12,3 +12,14 @@ main:
     url: /publications/
   - title: "CV"
     url: /assets/pdf/Henry_Resume.pdf
+
+# life links
+life:
+  - title: "Home"
+    url: /
+  - title: "Travel"
+    url: "#travel"
+  - title: "Snooker"
+    url: "#snooker"
+  - title: "Car"
+    url: "#car"

@@ -89,3 +89,137 @@
     font-weight: 700;
   }
 }
+
+/* Mode toggle (Research / Life) */
+.mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  gap: 6px;
+  font-family: $sans-serif-narrow;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__label {
+    font-size: $type-size-7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $muted-text-color;
+    transition: color 0.2s;
+
+    &--research {
+      order: -1; // visually before the slider
+    }
+  }
+
+  &__slider {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+    flex-shrink: 0;
+    background-color: $primary-color;
+    border-radius: 22px;
+    transition: background-color 0.3s;
+
+    &::before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+  }
+
+  // When checked (Life mode)
+  input:checked ~ &__slider {
+    background-color: $success-color;
+  }
+
+  input:checked ~ &__slider::before {
+    transform: translateX(18px);
+  }
+
+  input:checked ~ &__label--research {
+    color: $muted-text-color;
+  }
+
+  input:checked ~ &__label--life {
+    color: $primary-color;
+  }
+
+  // Default (Research mode) — slider is left, Research is active
+  input:not(:checked) ~ &__label--research {
+    color: $primary-color;
+  }
+
+  input:not(:checked) ~ &__label--life {
+    color: $muted-text-color;
+  }
+}
+
+/* Life mode sections */
+.life-tab {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2em;
+}
+
+.life-section {
+  margin-bottom: 2em;
+  text-align: center;
+
+  h4 {
+    margin-bottom: 0.5em;
+    text-align: left;
+  }
+}
+
+.life-map {
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.city-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(5, auto);
+  gap: 0.3em 2em;
+  padding: 0;
+  list-style: none;
+  max-width: 500px;
+  margin: 1em auto;
+  counter-reset: city;
+
+  li {
+    padding: 0.3em 0;
+    border-bottom: 1px solid $border-color;
+    counter-increment: city;
+
+    &::before {
+      content: counter(city) ". ";
+      font-weight: bold;
+      color: $primary-color;
+    }
+  }
+}

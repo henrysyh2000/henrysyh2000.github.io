@@ -14,8 +14,52 @@
     {% include_cached masthead.html %}
 
     <div class="initial-content">
-      {{ content }}
-      {% include after-content.html %}
+      <div class="mode-content mode-content--research">
+        {{ content }}
+        {% include after-content.html %}
+      </div>
+      <div class="mode-content mode-content--life" style="display:none">
+        <div id="tab-travel" class="life-tab">
+          <h3 class="archive__subtitle">My Favorite Cities Top 10</h3>
+          <ul class="city-list">
+            <li>Shanghai</li>
+            <li>Kyoto</li>
+            <li>Paris</li>
+            <li>Vancouver</li>
+            <li>Toronto</li>
+            <li>New York City</li>
+            <li>Cologne</li>
+            <li>Boston</li>
+            <li>Napa</li>
+            <li>Nashville</li>
+          </ul>
+          
+          <div class="life-section">
+            <h4>Canada</h4>
+            <div class="life-map">
+              <img src="{{ '/assets/images/maps/canada.svg' | relative_url }}" alt="Canada map" />
+            </div>
+          </div>
+          <div class="life-section">
+            <h4>USA</h4>
+            <div class="life-map">
+              <img src="{{ '/assets/images/maps/usa.svg' | relative_url }}" alt="USA map" />
+            </div>
+          </div>
+          <div class="life-section">
+            <h4>Europe</h4>
+            <div class="life-map">
+              <img src="{{ '/assets/images/maps/europe.svg' | relative_url }}" alt="Europe map" />
+            </div>
+          </div>
+        </div>
+        <div id="tab-snooker" class="life-tab" style="display:none">
+          <h3 class="archive__subtitle">Snooker</h3>
+        </div>
+        <div id="tab-car" class="life-tab" style="display:none">
+          <h3 class="archive__subtitle">Car</h3>
+        </div>
+      </div>
     </div>
 
     {% if site.search == true %}

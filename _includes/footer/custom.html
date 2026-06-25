@@ -1,3 +1,71 @@
 <!-- start custom footer snippets -->
 
+<script>
+  (function () {
+    var toggle = document.getElementById('mode-switch');
+    var researchNav = document.querySelector('.visible-links:not(.visible-links--life)');
+    var lifeNav = document.querySelector('.visible-links--life');
+    var researchContent = document.querySelector('.mode-content--research');
+    var lifeContent = document.querySelector('.mode-content--life');
+    var lifeTabs = document.querySelectorAll('.life-tab');
+
+    function showLifeTab(name) {
+      var tabId = 'tab-' + name;
+      lifeTabs.forEach(function (tab) {
+        tab.style.display = tab.id === tabId ? '' : 'none';
+      });
+    }
+
+    function setMode(isLife) {
+      toggle.checked = isLife;
+      if (isLife) {
+        if (researchNav) researchNav.style.display = 'none';
+        if (lifeNav) lifeNav.style.display = '';
+        if (researchContent) researchContent.style.display = 'none';
+        if (lifeContent) lifeContent.style.display = '';
+        showLifeTab('travel');
+      } else {
+        if (researchNav) researchNav.style.display = '';
+        if (lifeNav) lifeNav.style.display = 'none';
+        if (researchContent) researchContent.style.display = '';
+        if (lifeContent) lifeContent.style.display = 'none';
+      }
+    }
+
+    // Always start in Research mode
+    setMode(false);
+
+    // Toggle switch changes mode
+    if (toggle) {
+      toggle.addEventListener('change', function () {
+        setMode(toggle.checked);
+      });
+    }
+
+    // Life tab navigation
+    if (lifeNav) {
+      lifeNav.addEventListener('click', function (e) {
+        var link = e.target.closest('a');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (href === '/') {
+          setMode(false);
+          e.preventDefault();
+        } else if (href && href.startsWith('#')) {
+          e.preventDefault();
+          showLifeTab(href.substring(1));
+        }
+      });
+    }
+
+    // Home link resets to Research
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a');
+      if (link && link.getAttribute('href') === '/') {
+        setMode(false);
+      }
+    });
+  })();
+</script>
+
 <!-- end custom footer snippets -->
