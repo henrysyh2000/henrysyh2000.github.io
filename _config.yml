@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "n
 # Site Settings
 locale                   : "en-US"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
-# title                    : "Henry's PhD Cafe"
+title                    : "Yuanhao (Henry) Shen"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Yuanhao (Henry) Shen"
@@ -83,7 +83,7 @@ google:
   search_engine_id       : # YOUR_SEARCH_ENGINE_ID
   instant_search         : # false (default), true
 # SEO Related
-google_site_verification :
+google_site_verification : "AVr_JxI7J5oFm6oG8MqhNZFVyD47BErXPkOH42_TvJg"
 bing_site_verification   :
 naver_site_verification  :
 yandex_site_verification :
