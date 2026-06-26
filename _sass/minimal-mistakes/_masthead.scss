@@ -304,10 +304,12 @@ $bauhaus-black: #1A1A1A;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
-  margin: 1.5em 0;
+  width: 70%;
+  margin: 1.5em auto;
   border: 2px solid $bauhaus-black;
 
   @include breakpoint($small) {
+    width: 100%;
     grid-template-columns: 1fr;
   }
 }
