@@ -10,6 +10,8 @@ main:
     url: /
   - title: "Publications"
     url: /publications/
+  - title: "Blog"
+    url: /blog/
   - title: "CV"
     url: /assets/pdf/Henry_Resume.pdf
 
