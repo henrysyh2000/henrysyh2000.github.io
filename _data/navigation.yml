@@ -17,8 +17,6 @@ main:
 
 # life links
 life:
-  - title: "Home"
-    url: /
   - title: "Travel"
     url: "#travel"
   - title: "Snooker"
