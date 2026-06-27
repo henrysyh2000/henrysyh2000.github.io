@@ -185,7 +185,12 @@ $bauhaus-black: #1A1A1A;
 /* Life mode base */
 .life-tab {
   @include clearfix();
+  margin-inline: auto;
   padding: 1em 2em 2em;
+
+  @include breakpoint($x-large) {
+    max-width: $max-width;
+  }
 }
 
 .life-section {
