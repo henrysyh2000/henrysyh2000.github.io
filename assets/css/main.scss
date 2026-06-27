@@ -9,3 +9,4 @@ $max-width: 1600px; // override default 1280px
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+@import "custom"; // site-specific overrides
