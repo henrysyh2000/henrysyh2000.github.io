@@ -210,21 +210,24 @@ $bauhaus-black: #1A1A1A;
    ========================================================================== */
 
 .travel-layout {
-  @include breakpoint($medium) {
-    padding-inline-start: calc(170px + 3em);
-  }
+  @include clearfix();
 }
 
 .travel-sidebar {
-  width: 170px;
+  @include clearfix();
   font-family: $sans-serif;
-  margin-bottom: 1.5em;
 
-  @include breakpoint($medium) {
-    position: fixed;
-    top: 5em;
-    left: 2.5em;
-    margin-bottom: 0;
+  @include breakpoint($large) {
+    float: inline-start;
+    width: calc(#{$right-sidebar-width-narrow} - 1em);
+    overflow-y: auto;
+    max-height: calc(100vh - #{$nav-height} - 4em);
+    position: sticky;
+    top: 4em;
+  }
+
+  @include breakpoint($x-large) {
+    width: calc(#{$right-sidebar-width} - 1em);
   }
 
   &__item {
@@ -280,9 +283,16 @@ $bauhaus-black: #1A1A1A;
 }
 
 .travel-main {
-  min-width: 0;
-  max-width: 700px;
-  margin: 0 auto;
+  @include breakpoint($large) {
+    float: inline-end;
+    width: calc(100% - #{$right-sidebar-width-narrow});
+    padding-inline-start: 2em;
+  }
+
+  @include breakpoint($x-large) {
+    width: calc(100% - #{$right-sidebar-width});
+    padding-inline-start: 2em;
+  }
 }
 
 .travel-section {
