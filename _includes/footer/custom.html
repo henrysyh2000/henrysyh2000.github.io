@@ -8,28 +8,12 @@
       var researchContent = document.querySelector('.mode-content--research');
       var lifeContent = document.querySelector('.mode-content--life');
       var lifeTabs = document.querySelectorAll('.life-tab');
-      var travelNavItems = document.querySelectorAll('.travel-sidebar__item');
-      var travelSections = document.querySelectorAll('.travel-section');
-
-      function showTravelSection(name) {
-        var sectionId = 'travel-' + name;
-        travelNavItems.forEach(function (item) {
-          var isTarget = item.getAttribute('data-section') === name;
-          item.classList.toggle('is-active', isTarget);
-        });
-        travelSections.forEach(function (section) {
-          section.classList.toggle('is-active', section.id === sectionId);
-        });
-      }
 
       function showLifeTab(name) {
         var tabId = 'tab-' + name;
         lifeTabs.forEach(function (tab) {
           tab.style.display = tab.id === tabId ? '' : 'none';
         });
-        if (name === 'travel') {
-          showTravelSection('overview');
-        }
       }
 
       function setMode(isLife) {
@@ -74,17 +58,85 @@
         });
       }
 
-      // Travel section navigation (left sidebar)
-      var travelSidebar = document.querySelector('.travel-sidebar');
-      if (travelSidebar) {
-        travelSidebar.addEventListener('click', function (e) {
-          var item = e.target.closest('.travel-sidebar__item');
-          if (!item) return;
-          var section = item.getAttribute('data-section');
-          if (section) {
-            showTravelSection(section);
+      // Travel year counter controls
+      var travelCounter = document.querySelector('[data-travel-counter]');
+      if (travelCounter) {
+        var yearPanels = Array.prototype.slice.call(travelCounter.querySelectorAll('[data-travel-year-panel]'));
+        var activeYearIndex = 0;
+        var counterIsAnimating = false;
+        var reduceCounterMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function closePhotoNotes(panel) {
+          if (!panel) return;
+          panel.classList.remove('is-previewing');
+          var trigger = panel.querySelector('[data-travel-year-trigger]');
+          var moments = panel.querySelector('[data-travel-moments]');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+          if (moments) moments.setAttribute('aria-hidden', 'true');
+        }
+
+        function showTravelYear(index, animate) {
+          index = Math.max(0, Math.min(yearPanels.length - 1, index));
+          if (counterIsAnimating || (animate && index === activeYearIndex)) return;
+
+          var outgoingPanel = yearPanels[activeYearIndex];
+          var incomingPanel = yearPanels[index];
+          var direction = index > activeYearIndex ? 'older' : 'newer';
+
+          yearPanels.forEach(closePhotoNotes);
+
+          if (!animate || reduceCounterMotion) {
+            yearPanels.forEach(function (panel, panelIndex) {
+              panel.hidden = panelIndex !== index;
+            });
+            activeYearIndex = index;
+            return;
           }
+
+          counterIsAnimating = true;
+          incomingPanel.hidden = false;
+          outgoingPanel.classList.add('is-counter-leaving', 'is-counter-leaving--' + direction);
+          incomingPanel.classList.add('is-counter-entering', 'is-counter-entering--' + direction);
+          activeYearIndex = index;
+
+          window.setTimeout(function () {
+            outgoingPanel.hidden = true;
+            outgoingPanel.classList.remove('is-counter-leaving', 'is-counter-leaving--' + direction);
+            incomingPanel.classList.remove('is-counter-entering', 'is-counter-entering--' + direction);
+            counterIsAnimating = false;
+          }, 430);
+        }
+
+        travelCounter.addEventListener('click', function (e) {
+          var arrow = e.target.closest('[data-travel-step]');
+          if (!arrow || arrow.disabled) return;
+          showTravelYear(activeYearIndex + Number(arrow.getAttribute('data-travel-step')), true);
         });
+
+        yearPanels.forEach(function (panel) {
+          var trigger = panel.querySelector('[data-travel-year-trigger]');
+          var moments = panel.querySelector('[data-travel-moments]');
+          if (!trigger || !moments) return;
+
+          function openPhotoNotes() {
+            panel.classList.add('is-previewing');
+            trigger.setAttribute('aria-expanded', 'true');
+            moments.setAttribute('aria-hidden', 'false');
+          }
+
+          trigger.addEventListener('click', function () {
+            if (panel.classList.contains('is-previewing')) {
+              closePhotoNotes(panel);
+            } else {
+              openPhotoNotes();
+            }
+          });
+          panel.addEventListener('mouseleave', function () {
+            closePhotoNotes(panel);
+          });
+        });
+
+        showTravelYear(0, false);
       }
 
       // Home link resets to Research

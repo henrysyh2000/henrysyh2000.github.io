@@ -1,0 +1,52 @@
+years:
+  - year: 2026
+    places: "Mainz · Paris · Cologne · Frankfurt · Pittsburgh · Niagara Falls"
+  - year: 2025
+    places: "London, ON · Cincinnati · Cleveland · Québec City · Montréal · Seattle · Vancouver · Napa · Lake Tahoe · Syracuse"
+  - year: 2024
+    places: "Atlanta · Charleston · Chattanooga · Miami · Shanghai · Yosemite · Toronto · Buffalo · St. Louis · Little Rock · Nashville"
+  - year: 2023
+    places: "Boston · Cambridge · Malibu · Natural Bridge · Princeton"
+  - year: 2022
+    places: "Pittsburgh · New York City"
+
+moments:
+  - year: 2023
+    date: "October 15"
+    place: "Princeton, New Jersey"
+    title: "A joke hidden in a quiet corner"
+    image: "/assets/images/travel/2023-10-princeton.jpg"
+    alt: "A fountain sculpture of a seated woman lifting a vessel above her head"
+    caption: "Behind a plain brick wall, this strange fountain was easy to walk past. Its dry humor made the quiet corner more memorable to me than a polished landmark would have been."
+
+  - year: 2023
+    date: "March 15"
+    place: "Natural Bridge, Virginia"
+    title: "The road briefly stopped making sense"
+    image: "/assets/images/travel/2023-03-natural-bridge.jpg"
+    alt: "A zebra grazing beside a car in Natural Bridge, Virginia"
+    caption: "A zebra appearing beside the car was the opposite of a planned landmark. I kept the frame because travel often becomes most vivid when the itinerary briefly stops making sense."
+
+  - year: 2023
+    date: "January 14"
+    place: "Malibu, California"
+    title: "Where the city gives way"
+    image: "/assets/images/travel/2023-01-malibu.jpg"
+    alt: "Late afternoon light across the hills and coastline in Malibu"
+    caption: "The coast mattered less as a destination than the way the late light layered the hills. I took the photo to keep that slow transition between city, mountain, and ocean."
+
+  - year: 2023
+    date: "January 8"
+    place: "Boston, Massachusetts"
+    title: "History hiding in plain sight"
+    image: "/assets/images/travel/2023-01-boston.jpg"
+    alt: "A plaque marking the first intelligible sentence transmitted by telephone in Boston"
+    caption: "A small plaque on an ordinary wall marks where the first intelligible sentence traveled by telephone. I liked that such a foundational piece of engineering history could hide in plain sight."
+
+  - year: 2023
+    date: "January 8"
+    place: "Cambridge, Massachusetts"
+    title: "Looking up at a network"
+    image: "/assets/images/travel/2023-01-cambridge.jpg"
+    alt: "Antony Gormley's Chord rising through a stairwell at MIT"
+    caption: "I looked up in an MIT stairwell and found Antony Gormley's Chord climbing toward the skylight. Its rods and nodes made the building feel briefly like a physical model of a network."

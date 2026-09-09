@@ -1,0 +1,23 @@
+# Papers verified against https://scholar.google.com/citations?user=FTfwAmoAAAAJ
+# Titles and figures use the current arXiv versions, checked 2026-09-09.
+- title: "On the Diversity of Analogy Making in Large Language Models"
+  venue: "Preprint · 2026"
+  arxiv: "https://arxiv.org/abs/2608.03233"
+  image: "/assets/images/publications/analogy-diversity.png"
+  image_alt: "Examples of Maxwell's analogical reasoning across closely related and diverse scientific domains"
+  image_source: "https://arxiv.org/html/2608.03233v1/Figures/Figure_1_maxwell.png"
+
+- title: "IDRBench: Understanding the Capability of Large Language Models on Interdisciplinary Research"
+  # Main-conference acceptance is also recorded in the site's home-page news.
+  venue: "ICML 2026 · Main Conference"
+  arxiv: "https://arxiv.org/abs/2507.15736"
+  image: "/assets/images/publications/idrbench.png"
+  image_alt: "IDRBench tasks for identifying, integrating, and recommending interdisciplinary research ideas"
+  image_source: "https://arxiv.org/html/2507.15736v4/Figures/task_overview_v10_arxiv.png"
+
+- title: "SMARTCAL: An Approach to Self-Aware Tool-Use Evaluation and Calibration"
+  venue: "EMNLP 2024 · Industry Track"
+  arxiv: "https://arxiv.org/abs/2412.12151"
+  image: "/assets/images/publications/smartcal.png"
+  image_alt: "Comparison of ART, ART with verbalized confidence, and SMARTCAL's tool-use calibration framework"
+  image_source: "https://arxiv.org/html/2412.12151v1/Method_figure_v3.0.png"

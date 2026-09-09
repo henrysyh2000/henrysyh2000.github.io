@@ -1,116 +1,96 @@
 <div id="tab-travel" class="life-tab">
-  <div class="travel-layout">
-    <nav class="travel-sidebar">
-      <button class="travel-sidebar__item is-active" data-section="overview">
-        <span class="travel-sidebar__marker travel-sidebar__marker--square"></span>
-        Overview
-      </button>
-      <button class="travel-sidebar__item" data-section="timeline">
-        <span class="travel-sidebar__marker travel-sidebar__marker--circle"></span>
-        Timeline
-      </button>
-      <button class="travel-sidebar__item" data-section="maps">
-        <span class="travel-sidebar__marker travel-sidebar__marker--triangle"></span>
-        Maps
-      </button>
-    </nav>
-    <div class="travel-main">
-    <section id="travel-overview" class="travel-section is-active">
-      <h3 class="archive__subtitle">Make the World My Major!</h3>
+  <main class="travel-layout">
+    <section class="travel-overview" aria-labelledby="travel-overview-title">
+      <h2 id="travel-overview-title" class="archive__subtitle">Make the World My Major!</h2>
       <p>
         This is an adaptation of NYUSH's motto "Make the world your major" (or "让世界成为你的课堂" in Chinese).
-        Having spent 4 wonderful years there, this motto has constantly been motivating me to explore more cities and landscapes, dive into into the culture, and learn from these experiences, worldwide.
+        Having spent four wonderful years there, this motto has constantly motivated me to explore more cities and landscapes,
+        dive into their cultures, and learn from these experiences worldwide.
       </p>
-      <h3 class="archive__subtitle">Nerd in Stats</h3>
-      <div class="travel-stats">
-        <div class="travel-stat">
-          <span class="travel-stat__num">200+</span>
-          <span class="travel-stat__label">Cities</span>
-        </div>
-        <div class="travel-stat">
-          <span class="travel-stat__num">3</span>
-          <span class="travel-stat__label">Continents</span>
-        </div>
-        <div class="travel-stat">
-          <span class="travel-stat__num">11</span>
-          <span class="travel-stat__label">Countries</span>
-        </div>
-      </div>
-      <h3 class="archive__subtitle">My Top 10 Favorite Cities</h3>
-      <ul class="city-list">
-        <li>Shanghai</li>
-        <li>Kyoto</li>
-        <li>Paris</li>
-        <li>Vancouver</li>
-        <li>Toronto</li>
-        <li>New York City</li>
-        <li>Cologne</li>
-        <li>Boston</li>
-        <li>Napa</li>
-        <li>Nashville</li>
-      </ul>
+      <p>
+        I tend to wander into the everyday parts of a city rather than collect its landmarks. The timeline below follows the
+        small details, quiet corners, and unplanned encounters that made me stop and look twice.
+      </p>
     </section>
-    <section id="travel-timeline" class="travel-section">
-      <h3 class="archive__subtitle">My Footprint</h3>
-      <div class="timeline">
-        <div class="timeline__item">
-          <div class="timeline__marker timeline__marker--circle"></div>
-          <div class="timeline__year">2026</div>
-          <div class="timeline__body">
-            <h4>Mainz, Paris, Cologne, Frankfurt, Pittsburgh, Niagara Falls</h4>
-          </div>
-        </div>
-        <div class="timeline__item">
-          <div class="timeline__marker timeline__marker--circle"></div>
-          <div class="timeline__year">2025</div>
-          <div class="timeline__body">
-            <h4>London (ON), Cincinnati, Cleveland, Quebec City, Montreal, Seattle, Vancouver, Napa, Tahoe, Syracuse</h4>
-          </div>
-        </div>
-        <div class="timeline__item">
-          <div class="timeline__marker timeline__marker--circle"></div>
-          <div class="timeline__year">2024</div>
-          <div class="timeline__body">
-            <h4>Atlanta, Charleston, Chattanooga, Miami, Shanghai, Yosemite, Toronto, Buffalo, St. Louis, Little Rock, Nashville</h4>
-          </div>
-        </div>
-        <div class="timeline__item">
-          <div class="timeline__marker timeline__marker--circle"></div>
-          <div class="timeline__year">2023</div>
-          <div class="timeline__body">
-            <h4>Chicago, Washington D.C., Philidophia, Los Angeles, Boston</h4>
-          </div>
-        </div>
-        <div class="timeline__item">
-          <div class="timeline__marker timeline__marker--circle"></div>
-          <div class="timeline__year">2022</div>
-          <div class="timeline__body">
-            <h4>Pittsburgh, NYC</h4>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="travel-maps" class="travel-section">
-      <h3 class="archive__subtitle">Map Coloring</h3>
-      <div class="life-section">
-        <h4>Canada</h4>
-        <div class="life-map">
-          <img src="{{ '/assets/images/maps/canada.svg' | relative_url }}" alt="Canada map" />
-        </div>
-      </div>
-      <div class="life-section">
-        <h4>USA</h4>
-        <div class="life-map">
-          <img src="{{ '/assets/images/maps/usa.svg' | relative_url }}" alt="USA map" />
-        </div>
-      </div>
-      <div class="life-section">
-        <h4>Europe</h4>
-        <div class="life-map">
-          <img src="{{ '/assets/images/maps/europe.svg' | relative_url }}" alt="Europe map" />
+
+    <section id="travel-timeline" class="travel-story" aria-labelledby="travel-timeline-title">
+      <!-- <header class="travel-story__header">
+        <h2 id="travel-timeline-title" class="archive__subtitle">What Made Me Stop</h2>
+        <p>
+          I tend to wander into the everyday parts of a city rather than collect its landmarks. The timeline below follows the
+          small details, quiet corners, and unplanned encounters that made me stop and look twice.
+        </p>
+      </header> -->
+
+      <div class="travel-counter" data-travel-counter>
+        <div class="travel-counter__display" aria-live="polite">
+          {% for travel_year in site.data.travel.years %}
+            {% assign year_moments = site.data.travel.moments | where: "year", travel_year.year %}
+            <article
+              class="travel-counter__panel"
+              data-travel-year-panel
+              data-year="{{ travel_year.year }}"
+              data-index="{{ forloop.index0 }}"
+              {% unless forloop.first %}hidden{% endunless %}
+            >
+              <div class="travel-counter__year-picker">
+                <button
+                  class="travel-counter__arrow"
+                  type="button"
+                  data-travel-step="-1"
+                  aria-label="Show newer year"
+                  {% if forloop.first %}disabled{% endif %}
+                >
+                  <span aria-hidden="true">↑</span>
+                </button>
+
+                {% if year_moments.size > 0 %}
+                  <button
+                    class="travel-counter__year"
+                    type="button"
+                    data-travel-year-trigger
+                    aria-expanded="false"
+                  >
+                    {{ travel_year.year }}
+                  </button>
+                {% else %}
+                  <div class="travel-counter__year">{{ travel_year.year }}</div>
+                {% endif %}
+
+                <button
+                  class="travel-counter__arrow"
+                  type="button"
+                  data-travel-step="1"
+                  aria-label="Show older year"
+                  {% if forloop.last %}disabled{% endif %}
+                >
+                  <span aria-hidden="true">↓</span>
+                </button>
+              </div>
+              <p class="travel-counter__places">{{ travel_year.places }}</p>
+
+              {% if year_moments.size > 0 %}
+                <div class="travel-counter__moments" data-travel-moments aria-hidden="true">
+                  {% for moment in year_moments %}
+                    <figure class="travel-moment">
+                      <img src="{{ moment.image | relative_url }}" alt="{{ moment.alt }}" loading="lazy" />
+                      <figcaption>
+                        <div class="travel-moment__meta">
+                          <time datetime="{{ moment.year }}">{{ moment.date }}, {{ moment.year }}</time>
+                          <span aria-hidden="true">·</span>
+                          <span>{{ moment.place }}</span>
+                        </div>
+                        <h3>{{ moment.title }}</h3>
+                        <p>{{ moment.caption }}</p>
+                      </figcaption>
+                    </figure>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </article>
+          {% endfor %}
         </div>
       </div>
     </section>
-  </div>
-  </div>
+  </main>
 </div>

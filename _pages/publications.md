@@ -1,16 +1,22 @@
 ---
 permalink: /publications/
 layout: archive
+title: Publications
 ---
-<h3 class="archive__subtitle">{{ "Selected Publications" }}</h3>
 
-<ul>
-    <li>
-    2025.05: <a href="https://openreview.net/pdf?id=1HLwSpJZCh"> Understanding Large Language Models’ Ability on Interdisciplinary Research. </a> &nbsp;&nbsp; ICML Workshop. 
-    </li>
-    <li>
-    2024.11: <a href="https://aclanthology.org/2024.emnlp-industry.59.pdf"> SMARTCAL: An Approach to Self-Aware Tool-Use Evaluation and Calibration. </a> &nbsp;&nbsp; EMNLP Industry Track.
-    </li>
-    <!-- <li>Item 2</li>
-    <li>Item 3</li> -->
-</ul>
+<div class="publication-list">
+  {% for paper in site.data.publications %}
+  <article class="publication">
+    <a class="publication__link" href="{{ paper.arxiv }}" target="_blank" rel="noopener noreferrer" aria-label="{{ paper.title | escape }} — view on arXiv (opens in a new tab)">
+      <div class="publication__thumbnail">
+        <img src="{{ paper.image | relative_url }}" alt="{{ paper.image_alt | escape }}" width="600" height="400" loading="lazy" decoding="async">
+      </div>
+      <div class="publication__body">
+        <h2 class="publication__title">{{ paper.title | escape }}</h2>
+        <p class="publication__venue">({{ paper.venue | escape }})</p>
+        <span class="publication__arxiv">arXiv <span aria-hidden="true">↗</span></span>
+      </div>
+    </a>
+  </article>
+  {% endfor %}
+</div>
