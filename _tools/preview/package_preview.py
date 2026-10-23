@@ -75,7 +75,7 @@ for name in routes.values():
  for url in re.findall(r'(?:href|src|data)="([^"]+)"',(out/name).read_text()):
   if url.startswith(('http:','https:','mailto:','#','data:','//')):continue
   assert (out/urlsplit(url).path).is_file(),(name,url)
-assert 'I somehow build tools for lazy people' in (out/'index.html').read_text()
+assert re.search(r'<p class="home-intro__motto"><q>[^<]+</q></p>', (out/'index.html').read_text())
 assert 'Lake Tahoe, CA' in (out/'index.html').read_text()
 assert 'tab-snooker' not in (out/'index.html').read_text()
 assert (out/'assets/pdf/Henry_Resume.pdf').is_file()
