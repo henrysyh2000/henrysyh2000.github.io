@@ -1,23 +1,18 @@
 ---
-title: "技术博客"
+title: "Technical Blog"
 permalink: /blog/
 layout: archive
 author_profile: false
-lang: zh-CN
-locale: zh-CN
-translations:
-  zh-CN: /blog/
-  en: /en/blog/
+lang: en
+locale: en
 ---
 
-[中文](/blog/) · [English](/en/blog/)
+[All articles](/blog/) · [Henry’s Research Notebook](/en/blog/columns/research-notebook/)
 
-[全部文章](/blog/) · [All articles](/en/blog/) · [亨利的科研日记本](/blog/columns/research-notebook/) · [Henry’s Research Notebook](/en/blog/columns/research-notebook/)
-
-记录科研中的问题、实验中的发现，以及慢慢想清楚的事情。
+Technical explorations, lessons from experiments, and reflections on research.
 
 {% assign entries = site.posts | where_exp: 'item', 'item.hidden != true' %}
-{% assign entries = entries | where: 'lang', 'zh-CN' %}
+{% assign entries = entries | where_exp: 'item', 'item.lang == "en" or item.lang == nil' %}
 {% for entry in entries %}
 ## [{{ entry.title }}]({{ entry.url | relative_url }})
 

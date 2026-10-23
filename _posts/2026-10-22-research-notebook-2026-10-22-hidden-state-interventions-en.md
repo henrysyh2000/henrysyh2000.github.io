@@ -7,9 +7,6 @@ permalink: "/en/blog/research-notebook-2026-10-22-hidden-state-interventions/"
 translation_key: research-notebook-2026-10-22-hidden-state-interventions
 lang: en
 locale: en
-translations:
-  zh-CN: "/blog/research-notebook-2026-10-22-hidden-state-interventions/"
-  en: "/en/blog/research-notebook-2026-10-22-hidden-state-interventions/"
 toc_label: On this page
 layout: single
 author_profile: false
@@ -29,9 +26,7 @@ series: research-notebook
 
 Today I continued studying analogy generation in large language models. I began modifying hidden states directly during computation, observing internal trajectories, next-token distributions, and the analogies ultimately generated. The main model was LLaMA 3.1-8B-Instruct. Most mechanism probes used the first AnaloBench example; full-generation experiments extended to the first ten.
 
-Editions: [中文](https://henrysyh2000.github.io/blog/research-notebook-2026-10-22-hidden-state-interventions/) · [English](https://henrysyh2000.github.io/en/blog/research-notebook-2026-10-22-hidden-state-interventions/)
-
-Column: [亨利的科研日记本](https://henrysyh2000.github.io/blog/columns/research-notebook/) · [Henry’s Research Notebook](https://henrysyh2000.github.io/en/blog/columns/research-notebook/)
+Column: [Henry’s Research Notebook](https://henrysyh2000.github.io/en/blog/columns/research-notebook/)
 
 The clearest result was that internal trajectories and vocabulary distributions were easy to change, while analogy quality did not improve along with them. On the first ten examples, every intervention strategy under both noise–λ combinations had a lower mean overall score than pure greedy decoding. After adding sustained layerwise jumps later in the day, all 30 outputs from the three intervention strategies reached the 100-token limit, with severe repetition or meaningless fragments.
 

@@ -5,19 +5,14 @@ layout: archive
 author_profile: false
 lang: en
 locale: en
-translations:
-  zh-CN: /blog/
-  en: /en/blog/
 ---
 
-[中文](/blog/) · [English](/en/blog/)
+[All articles](/blog/) · [Henry’s Research Notebook](/en/blog/columns/research-notebook/)
 
-[全部文章](/blog/) · [All articles](/en/blog/) · [亨利的科研日记本](/blog/columns/research-notebook/) · [Henry’s Research Notebook](/en/blog/columns/research-notebook/)
-
-Questions from research, observations from experiments, and ideas that become clearer along the way.
+Technical explorations, lessons from experiments, and reflections on research.
 
 {% assign entries = site.posts | where_exp: 'item', 'item.hidden != true' %}
-{% assign entries = entries | where_exp: "item", "item.lang == 'en' or item.lang == nil" %}
+{% assign entries = entries | where_exp: 'item', 'item.lang == "en" or item.lang == nil' %}
 {% for entry in entries %}
 ## [{{ entry.title }}]({{ entry.url | relative_url }})
 
