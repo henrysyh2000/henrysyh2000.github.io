@@ -3,3 +3,10 @@
 <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg">
 
 <!-- end custom head snippets -->
+
+{% if page.translations %}
+  {% for translation in page.translations %}
+<link rel="alternate" hreflang="{{ translation[0] | escape }}" href="{{ translation[1] | absolute_url }}">
+  {% endfor %}
+<link rel="alternate" hreflang="x-default" href="{{ page.translations['en'] | absolute_url }}">
+{% endif %}

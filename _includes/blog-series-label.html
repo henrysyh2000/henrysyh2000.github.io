@@ -1,0 +1,7 @@
+{% assign column = nil %}
+{% if include.article.series %}
+  {% assign column = site.data.blog-series[include.article.series][include.article.lang] %}
+{% endif %}
+{% if column %}
+  <p class="blog-series-label">{% if include.article.lang == 'zh-CN' %}专栏{% else %}Column{% endif %} · <a href="{{ column.url | relative_url }}">{{ column.title | escape }}</a></p>
+{% endif %}

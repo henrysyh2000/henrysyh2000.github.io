@@ -1,52 +1,75 @@
 ---
-layout: archive
+layout: default
 ---
 
-{{ content }}
+<main id="main" class="home-page">
+  <section class="home-intro" aria-labelledby="home-name">
+    <div class="home-intro__text">
+      <h1 id="home-name">Yuanhao (Henry) Shen</h1>
+      <p class="home-intro__motto"><q>{{ site.author.motto | escape }}</q></p>
+      <p class="home-intro__focus">My research focuses on interpreting large language models at inference time, with applications in AI-accelerated scientific discovery.</p>
+      <p class="home-intro__bio">I’m a PhD student in Electrical and Computer Engineering at <a href="https://www.queensu.ca/">Queen’s University</a>, supervised by Prof. <a href="https://www.xiaodanzhu.com/">Xiaodan Zhu</a>. I’m also an affiliated researcher at the <a href="https://vectorinstitute.ai/">Vector Institute</a> and a research intern at the <a href="https://nrc.canada.ca/en">National Research Council Canada</a>.</p>
+      <nav class="home-contact" aria-label="Contact and research profiles">
+        {% if site.author.email %}<a href="mailto:{{ site.author.email | escape }}">Email</a>{% endif %}
+        {% for link in site.author.links %}{% if link.label == 'Google Scholar' and link.url %}<a href="{{ link.url | escape }}">Google Scholar</a>{% endif %}{% endfor %}
+        {% if site.author.github %}<a href="https://github.com/{{ site.author.github | escape }}">GitHub</a>{% endif %}
+        {% if site.author.linkedin %}<a href="https://www.linkedin.com/in/{{ site.author.linkedin | escape }}">LinkedIn</a>{% endif %}
+      </nav>
+    </div>
+    <figure class="home-portrait">
+      <img src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name | escape }}" width="713" height="793" fetchpriority="high" decoding="async">
+      <figcaption>{{ site.author.portrait_location | escape }}</figcaption>
+    </figure>
+  </section>
 
-<h3 class="archive__subtitle">{{ "About Me" }}</h3>
-<p>
-Hi there! 
-</p>
-<p>
-I am a PhD student in ECE department at <a href="https://www.queensu.ca/"><img src="{{ '/assets/images/queensu_badge.png' | relative_url }}" alt="Queen's University" style="height: 1.2em; vertical-align: middle; margin: 0 2px;" />Queen's University</a> supervised by Prof. <a href="https://www.xiaodanzhu.com/">Xiaodan Zhu</a>. 
-I am also currently an affiliated researcher at <a href="https://vectorinstitute.ai/"><img src="{{ '/assets/images/vector_logo.png' | relative_url }}" alt="Queen's University" style="height: 1.2em; vertical-align: middle; margin: 0 2px;" />Vector Institute for Artifical Intelligence</a> and a research intern at <a href="https://nrc.canada.ca/en"><img src="{{ '/assets/images/nrcc_logo.png' | relative_url }}" alt="Queen's University" style="height: 1.2em; vertical-align: middle; margin: 0 2px;" />National Research Council Canada</a>.
-My current research focus on LLM inference time interpretability and its application in the context of AI-accelerated scientific discovery. 
-</p>
-<p>
-Earlier, I completed my degree in Master of Science at <a href="https://cds.nyu.edu/"><img src="{{ '/assets/images/cds_logo.jpg' | relative_url }}" alt="Queen's University" style="height: 1.2em; vertical-align: middle; margin: 0 2px;" />NYU Center for Data Science</a> and Bachlor of Science at <a href="https://shanghai.nyu.edu"><img src="{{ '/assets/images/NYUSH_logo.png' | relative_url }}" alt="Queen's University" style="height: 1.2em; vertical-align: middle; margin: 0 2px;" />NYU Shanghai</a>
-I also had the previlige to work with Dr. Lei Chen at Rakuten Institute for Technology and published my very first work at EMNLP24 Industry Track.
-</p>
+  <section class="home-research" aria-labelledby="home-research-title">
+    <div class="home-section-heading">
+      <h2 id="home-research-title">Selected research</h2>
+      <a href="{{ '/publications/' | relative_url }}">All publications</a>
+    </div>
+    <div class="home-papers">
+      {% for paper in site.data.publications limit:3 %}
+        {% include publication-row.html paper=paper %}
+      {% endfor %}
+    </div>
+  </section>
 
-<!-- <h3 class="archive__subtitle">{{ "site.data.ui-text[site.locale].recent_posts | default: "Latest News"" }}</h3> -->
-<h3 class="archive__subtitle">{{ "Latest News" }}</h3>
+  <div class="home-notes-grid">
+    <section class="home-updates" aria-labelledby="home-updates-title">
+      <h2 id="home-updates-title">Recent updates</h2>
+      <ul class="home-news">
+        {% for item in site.data.home-news limit:3 %}
+          <li><time datetime="{{ item.date }}">{{ item.date | append: '-01' | date: '%b %Y' }}</time><span>{{ item.text | markdownify | remove: '<p>' | remove: '</p>' }}</span></li>
+        {% endfor %}
+      </ul>
+      {% if site.data.home-news.size > 3 %}
+      <details class="home-news-archive">
+        <summary>Earlier updates</summary>
+        <ul class="home-news">
+          {% for item in site.data.home-news offset:3 %}
+            <li><time datetime="{{ item.date }}">{{ item.date | append: '-01' | date: '%b %Y' }}</time><span>{{ item.text | markdownify | remove: '<p>' | remove: '</p>' }}</span></li>
+          {% endfor %}
+        </ul>
+      </details>
+      {% endif %}
+    </section>
 
-{% if paginator %}
-  {% assign posts = paginator.posts %}
-{% else %}
-  {% assign posts = site.posts %}
-{% endif %}
+    <section class="home-notebook" aria-labelledby="home-notebook-title">
+      <h2 id="home-notebook-title">Research notebook</h2>
+      <h3><a href="{{ '/blog/columns/research-notebook/' | relative_url }}">Henry’s Research Notebook</a></h3>
+      <p>Questions from research, observations from experiments, and ideas that become clearer along the way.</p>
+      {% assign notebook_posts = site.posts | where: 'series', 'research-notebook' | where: 'lang', 'en' | where_exp: 'post', 'post.hidden != true' %}
+      {% if notebook_posts.size > 0 %}
+        <p class="home-notebook__latest"><a href="{{ notebook_posts.first.url | relative_url }}">{{ notebook_posts.first.title | escape }}</a></p>
+      {% endif %}
+      <p><a href="{{ '/blog/columns/research-notebook/' | relative_url }}">Read the notebook →</a></p>
+    </section>
+  </div>
 
-{% assign entries_layout = page.entries_layout | default: 'list' %}
-<!-- <div class="entries-{{ entries_layout }}">
-  {% include documents-collection.html entries=posts type=entries_layout %}
-</div> -->
+  <section class="home-background" aria-labelledby="home-background-title">
+    <h2 id="home-background-title">Previously</h2>
+    <p>I received my MS from the <a href="https://cds.nyu.edu/">NYU Center for Data Science</a> and my BS from <a href="https://shanghai.nyu.edu/">NYU Shanghai</a>. I also worked with Dr. Lei Chen at the Rakuten Institute of Technology, where my first research paper was published in the EMNLP 2024 Industry Track.</p>
+  </section>
 
-<div>
-  <ul>
-    <li>2026.06 I am serving as an reviewer in NeurIPS26. </li>
-    <li>2026.04 <a href="https://arxiv.org/abs/2507.15736"> IDRBench</a> recently got accepted at the ICML 2026 Main Conference. </li>
-    <li>2026.03 I am serving as an reviewer in ICML26. </li>
-    <li>2025.07 <a href="https://openreview.net/pdf?id=1HLwSpJZCh"> IDRBench</a> got accepted at the ICML 2025 World Models Workshop. </li>
-    <li>2024.11 <a href="https://aclanthology.org/2024.emnlp-industry.59"> SMARTCAL</a> got accepted to EMNLP 24 Industry Track. </li>
-    <!-- <li>Item 2</li>
-    <li>Item 3</li> -->
-  </ul>
-</div>
-
-
-<div class="entries-{{ tags_layout }}">
-  {% include page__taxonomy.html %}
-</div>
-
-{% include paginator.html %}
+  {{ content }}
+</main>

@@ -3,15 +3,15 @@
 
 <!doctype html>
 {% include copyright.html %}
-<html lang="{{ site.locale | replace: "_", "-" | default: "en" }}" class="no-js">
+<html lang="{{ page.lang | default: page.locale | default: site.locale | replace: "_", "-" | default: "en" }}" class="no-js">
   <head>
     {% include head.html %}
     {% include head/custom.html %}
   </head>
 
-  <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}" dir="{% if site.rtl %}rtl{% else %}ltr{% endif %}">
+  <body class="site-design {% if page.collection == 'posts' or page.layout == 'blog-index' or page.layout == 'posts' %}blog-reading {% if page.toc %}blog-with-toc {% endif %}{% endif %}layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}" data-life-page="{{ page.life_page | escape }}" dir="{% if site.rtl %}rtl{% else %}ltr{% endif %}">
     {% include_cached skip-links.html %}
-    {% include_cached masthead.html %}
+    {% include site-masthead.html %}
 
     <div class="initial-content">
       <div class="mode-content mode-content--research">
@@ -20,8 +20,8 @@
       </div>
       <div class="mode-content mode-content--life" style="display:none">
         {% include travel.html %}
-        <div id="tab-snooker" class="life-tab" style="display:none">
-          <h3 class="archive__subtitle">Snooker</h3>
+        <div id="tab-gti-mark-8" class="life-tab" style="display:none">
+          {% include gti-notebook.html %}
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
     <div id="footer" class="page__footer">
       <footer>
         {% include footer/custom.html %}
-        {% include_cached footer.html %}
+        {% include site-footer.html %}
       </footer>
     </div>
 

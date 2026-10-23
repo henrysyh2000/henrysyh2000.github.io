@@ -1,3 +1,21 @@
+{% if page.translation_key %}
+  {% assign language_posts = site.posts | where: 'lang', page.lang | where_exp: 'item', 'item.hidden != true' %}
+  {% assign newer_post = nil %}
+  {% assign older_post = nil %}
+  {% for item in language_posts %}
+    {% if item.id == page.id %}
+      {% assign older_post = language_posts[forloop.index] %}
+      {% break %}
+    {% endif %}
+    {% assign newer_post = item %}
+  {% endfor %}
+  {% if older_post or newer_post %}
+  <nav class="pagination" aria-label="{% if page.lang == 'zh-CN' %}更多文章{% else %}More articles{% endif %}">
+    {% if older_post %}<a href="{{ older_post.url | relative_url }}" class="pagination--pager" title="{{ older_post.title | escape }}">{% if page.lang == 'zh-CN' %}较早文章{% else %}Older article{% endif %}</a>{% endif %}
+    {% if newer_post %}<a href="{{ newer_post.url | relative_url }}" class="pagination--pager" title="{{ newer_post.title | escape }}">{% if page.lang == 'zh-CN' %}较新文章{% else %}Newer article{% endif %}</a>{% endif %}
+  </nav>
+  {% endif %}
+{% else %}
 {% if page.previous or page.next %}
   <nav class="pagination">
     {% if page.previous %}
@@ -11,4 +29,5 @@
       <a href="#" class="pagination--pager disabled">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
     {% endif %}
   </nav>
+{% endif %}
 {% endif %}

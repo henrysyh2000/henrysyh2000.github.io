@@ -1,14 +1,17 @@
 years:
   - year: 2026
-    places: "Mainz · Paris · Cologne · Frankfurt · Pittsburgh · Niagara Falls"
+    places: "Mainz · Paris · Cologne · Frankfurt · Pittsburgh · Niagara Falls · Chicago · Nanning · Beijing · Tokyo · Seoul"
   - year: 2025
-    places: "London, ON · Cincinnati · Cleveland · Québec City · Montréal · Seattle · Vancouver · Napa · Lake Tahoe · Syracuse"
+    places: "London, ON · Cincinnati · Cleveland · Québec City · Montréal · Seattle · Vancouver · Napa · Lake Tahoe · Syracuse · Louisville · Atlanta · White Sulphur Springs · Chattanooga"
   - year: 2024
     places: "Atlanta · Charleston · Chattanooga · Miami · Shanghai · Yosemite · Toronto · Buffalo · St. Louis · Little Rock · Nashville"
   - year: 2023
     places: "Boston · Cambridge · Malibu · Natural Bridge · Princeton"
   - year: 2022
     places: "Pittsburgh · New York City"
+
+  - year: 2019
+    places: "Siena · Rome · Florence"
 
 moments:
   - year: 2023
@@ -50,3 +53,529 @@ moments:
     image: "/assets/images/travel/2023-01-cambridge.jpg"
     alt: "Antony Gormley's Chord rising through a stairwell at MIT"
     caption: "I looked up in an MIT stairwell and found Antony Gormley's Chord climbing toward the skylight. Its rods and nodes made the building feel briefly like a physical model of a network."
+
+# Approximate geographic reference points, not trip addresses or routes.
+locations: [
+  {
+    "id": "mainz",
+    "name": "Mainz",
+    "region": "Germany",
+    "years": [
+      2026
+    ],
+    "view": "europe",
+    "lon": 8.2732,
+    "lat": 49.9825,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "paris",
+    "name": "Paris",
+    "region": "France",
+    "years": [
+      2026
+    ],
+    "view": "europe",
+    "lon": 2.353,
+    "lat": 48.8581,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "cologne",
+    "name": "Cologne",
+    "region": "Germany",
+    "years": [
+      2026
+    ],
+    "view": "europe",
+    "lon": 6.9481,
+    "lat": 50.932,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "frankfurt",
+    "name": "Frankfurt",
+    "region": "Germany",
+    "years": [
+      2026
+    ],
+    "view": "europe",
+    "lon": 8.675,
+    "lat": 50.1,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "pittsburgh",
+    "name": "Pittsburgh",
+    "region": "Pennsylvania, US",
+    "years": [
+      2022,
+      2026
+    ],
+    "view": "north-america",
+    "lon": -80.0019,
+    "lat": 40.4319,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "niagara-falls",
+    "name": "Niagara Falls",
+    "region": "Niagara region",
+    "years": [
+      2026
+    ],
+    "view": "north-america",
+    "lon": -79.07,
+    "lat": 43.09,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson",
+    "coordinate_note": "Rounded to the Niagara Falls area; does not identify a river bank or visit address."
+  },
+  {
+    "id": "seoul",
+    "name": "Seoul",
+    "region": "South Korea",
+    "years": [
+      2026
+    ],
+    "view": "east-asia",
+    "lon": 126.9978,
+    "lat": 37.5683,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "tokyo",
+    "name": "Tokyo",
+    "region": "Japan",
+    "years": [
+      2026
+    ],
+    "view": "east-asia",
+    "lon": 139.7495,
+    "lat": 35.687,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "beijing",
+    "name": "Beijing",
+    "region": "China",
+    "years": [
+      2026
+    ],
+    "view": "east-asia",
+    "lon": 116.3942,
+    "lat": 39.9017,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "nanning",
+    "name": "Nanning",
+    "region": "Guangxi, China",
+    "years": [
+      2026
+    ],
+    "view": "east-asia",
+    "lon": 108.3181,
+    "lat": 22.8219,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "chicago",
+    "name": "Chicago",
+    "region": "Illinois, US",
+    "years": [
+      2026
+    ],
+    "view": "north-america",
+    "lon": -87.6352,
+    "lat": 41.848,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "london-on",
+    "name": "London, ON",
+    "region": "Ontario, Canada",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -81.25,
+    "lat": 42.97,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "cincinnati",
+    "name": "Cincinnati",
+    "region": "Ohio, US",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -84.4589,
+    "lat": 39.1638,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "cleveland",
+    "name": "Cleveland",
+    "region": "Ohio, US",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -81.6969,
+    "lat": 41.4719,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "quebec-city",
+    "name": "Québec City",
+    "region": "Québec, Canada",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -71.2456,
+    "lat": 46.84,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "montreal",
+    "name": "Montréal",
+    "region": "Québec, Canada",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -73.5852,
+    "lat": 45.5019,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "seattle",
+    "name": "Seattle",
+    "region": "Washington, US",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -122.3153,
+    "lat": 47.6004,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "vancouver",
+    "name": "Vancouver",
+    "region": "British Columbia, Canada",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -123.1236,
+    "lat": 49.2754,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "napa",
+    "name": "Napa",
+    "region": "California, US",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -122.3007,
+    "lat": 38.2979,
+    "coordinate_source": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_06.txt"
+  },
+  {
+    "id": "lake-tahoe",
+    "name": "Lake Tahoe",
+    "region": "California / Nevada, US",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -120.0215,
+    "lat": 39.1003,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "syracuse",
+    "name": "Syracuse",
+    "region": "New York, US",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -76.15,
+    "lat": 43.05,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "atlanta",
+    "name": "Atlanta",
+    "region": "Georgia, US",
+    "years": [
+      2024,
+      2025
+    ],
+    "view": "north-america",
+    "lon": -84.3676,
+    "lat": 33.7395,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "charleston",
+    "name": "Charleston",
+    "region": "West Virginia, US",
+    "years": [
+      2024
+    ],
+    "view": "north-america",
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson",
+    "lon": -81.6327,
+    "lat": 38.3497
+  },
+  {
+    "id": "chattanooga",
+    "name": "Chattanooga",
+    "region": "Tennessee, US",
+    "years": [
+      2024,
+      2025
+    ],
+    "view": "north-america",
+    "lon": -85.25,
+    "lat": 35.07,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "miami",
+    "name": "Miami",
+    "region": "Florida, US",
+    "years": [
+      2024
+    ],
+    "view": "north-america",
+    "lon": -80.2261,
+    "lat": 25.7896,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "shanghai",
+    "name": "Shanghai",
+    "region": "China",
+    "years": [
+      2024
+    ],
+    "view": "east-asia",
+    "lon": 121.4346,
+    "lat": 31.2184,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "yosemite",
+    "name": "Yosemite",
+    "region": "California, US",
+    "years": [
+      2024
+    ],
+    "view": "north-america",
+    "lon": -119.5776,
+    "lat": 37.7425,
+    "coordinate_source": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_06.txt",
+    "coordinate_note": "Yosemite Valley reference point, not an exact visit location."
+  },
+  {
+    "id": "toronto",
+    "name": "Toronto",
+    "region": "Ontario, Canada",
+    "years": [
+      2024
+    ],
+    "view": "north-america",
+    "lon": -79.3895,
+    "lat": 43.6646,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "buffalo",
+    "name": "Buffalo",
+    "region": "New York, US",
+    "years": [
+      2024
+    ],
+    "view": "north-america",
+    "lon": -78.8819,
+    "lat": 42.8819,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "st-louis",
+    "name": "St. Louis",
+    "region": "Missouri, US",
+    "years": [
+      2024
+    ],
+    "view": "north-america",
+    "lon": -90.2419,
+    "lat": 38.637,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "little-rock",
+    "name": "Little Rock",
+    "region": "Arkansas, US",
+    "years": [
+      2024
+    ],
+    "view": "north-america",
+    "lon": -92.3311,
+    "lat": 34.7361,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "nashville",
+    "name": "Nashville",
+    "region": "Tennessee, US",
+    "years": [
+      2024
+    ],
+    "view": "north-america",
+    "lon": -86.7819,
+    "lat": 36.1719,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "louisville",
+    "name": "Louisville",
+    "region": "Kentucky, US",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -85.7506,
+    "lat": 38.227,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "white-sulphur-springs",
+    "name": "White Sulphur Springs",
+    "region": "West Virginia, US",
+    "years": [
+      2025
+    ],
+    "view": "north-america",
+    "lon": -80.3009,
+    "lat": 37.7993,
+    "coordinate_source": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt"
+  },
+  {
+    "id": "siena",
+    "name": "Siena",
+    "region": "Italy",
+    "years": [
+      2019
+    ],
+    "view": "europe",
+    "lon": 11.35,
+    "lat": 43.317,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "rome",
+    "name": "Rome",
+    "region": "Italy",
+    "years": [
+      2019
+    ],
+    "view": "europe",
+    "lon": 12.4813,
+    "lat": 41.8979,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "florence",
+    "name": "Florence",
+    "region": "Italy",
+    "years": [
+      2019
+    ],
+    "view": "europe",
+    "lon": 11.25,
+    "lat": 43.78,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "boston",
+    "name": "Boston",
+    "region": "United States of America",
+    "years": [
+      2023
+    ],
+    "view": "north-america",
+    "lon": -71.072,
+    "lat": 42.3319,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "new-york-city",
+    "name": "New York City",
+    "region": "United States of America",
+    "years": [
+      2022
+    ],
+    "view": "north-america",
+    "lon": -73.9957,
+    "lat": 40.7216,
+    "coordinate_source": "https://github.com/nvkelso/natural-earth-vector/tree/master/geojson"
+  },
+  {
+    "id": "cambridge",
+    "name": "Cambridge",
+    "region": "Massachusetts, US",
+    "years": [
+      2023
+    ],
+    "view": "north-america",
+    "lon": -71.1187,
+    "lat": 42.376,
+    "coordinate_source": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_25.txt"
+  },
+  {
+    "id": "malibu",
+    "name": "Malibu",
+    "region": "California, US",
+    "years": [
+      2023
+    ],
+    "view": "north-america",
+    "lon": -118.7596,
+    "lat": 34.0259,
+    "coordinate_source": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_06.txt"
+  },
+  {
+    "id": "princeton",
+    "name": "Princeton",
+    "region": "New Jersey, US",
+    "years": [
+      2023
+    ],
+    "view": "north-america",
+    "lon": -74.6667,
+    "lat": 40.3582,
+    "coordinate_source": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_34.txt"
+  },
+  {
+    "id": "natural-bridge",
+    "name": "Natural Bridge",
+    "region": "Virginia, US",
+    "years": [
+      2023
+    ],
+    "view": "north-america",
+    "lon": -79.54,
+    "lat": 37.63,
+    "coordinate_source": "https://en.wikipedia.org/wiki/Natural_Bridge,_Virginia",
+    "coordinate_note": "Rounded Natural Bridge area reference; not the exact location of the photograph."
+  }
+]

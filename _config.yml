@@ -117,6 +117,8 @@ author:
   name             : "Yuanhao (Henry) Shen"
   avatar           : "/assets/images/bio-photo.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "PhD Student at Queen's University"
+  motto            : "I somehow build tools for lazy people, and I'm one of them"
+  portrait_location: "Lake Tahoe, CA"
   location         : "Kingston, ON"
   email            : "yuanhao.shen@queensu.ca"
   github          : "henrysyh2000"
@@ -172,6 +174,10 @@ include:
   - .htaccess
   - _pages
 exclude:
+  - Document
+  - AGENTS.md
+  - sparkling-whiteboard.md
+  - _tools
   - "*.sublime-project"
   - "*.sublime-workspace"
   - vendor
@@ -326,7 +332,7 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: true
+      author_profile: false
       read_time: true
       comments: # true
       share: true

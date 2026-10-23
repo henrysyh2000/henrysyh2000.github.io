@@ -1,0 +1,31 @@
+<div class="masthead site-masthead">
+  <div class="masthead__inner-wrap">
+    <a class="site-wordmark" href="{{ '/' | relative_url }}" aria-label="Yuanhao (Henry) Shen, home">Henry Shen</a>
+    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <ul class="visible-links">
+        {% for link in site.data.navigation.main %}
+          {% assign current_link = false %}
+          {% if link.url == '/' %}
+            {% if page.url == '/' %}{% assign current_link = true %}{% endif %}
+          {% elsif page.url contains link.url %}
+            {% assign current_link = true %}
+          {% elsif link.url == '/blog/' and page.collection == 'posts' %}
+            {% assign current_link = true %}
+          {% endif %}
+          <li><a href="{{ link.url | relative_url }}"{% if current_link %} aria-current="page"{% endif %}>{{ link.title | escape }}</a></li>
+        {% endfor %}
+      </ul>
+      <ul class="visible-links visible-links--life" style="display:none">
+        {% for link in site.data.navigation.life %}
+          <li><a href="{{ link.url | relative_url }}">{{ link.title | escape }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <label class="mode-toggle">
+      <input type="checkbox" id="mode-switch" aria-label="Switch between research and life">
+      <span class="mode-toggle__label mode-toggle__label--research">Research</span>
+      <span class="mode-toggle__slider" aria-hidden="true"></span>
+      <span class="mode-toggle__label mode-toggle__label--life">Life</span>
+    </label>
+  </div>
+</div>

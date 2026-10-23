@@ -1,0 +1,151 @@
+<script>
+(function () {
+  'use strict';
+  var atlas = document.querySelector('[data-travel-atlas]');
+  if (!atlas) return;
+  var svg = atlas.querySelector('[data-travel-map]');
+  var locations = JSON.parse(atlas.querySelector('[data-travel-locations]').textContent);
+  var pins = Array.from(atlas.querySelectorAll('[data-map-place]'));
+  var items = Array.from(atlas.querySelectorAll('[data-place-item]'));
+  var regions = {
+    world: [0, 5, 360, 170],
+    'north-america': [47, 28, 88, 50],
+    europe: [169, 31, 34, 20],
+    'east-asia': [270, 35, 58, 37]
+  };
+  var view = regions.world.slice();
+  var activeYear = 'all';
+  var selectedId = null;
+  var drag = null;
+
+  function isVisible(place) {
+    return activeYear === 'all' || (activeYear === 'recent' ? place.years.some(function (year) { return year >= 2024 && year <= 2026; }) : place.years.includes(Number(activeYear)));
+  }
+  function sizePins() {
+    var bounds = svg.getBoundingClientRect();
+    var unit = Math.max(view[2] / (bounds.width || 720), view[3] / (bounds.height || 430));
+    pins.forEach(function (pin) {
+      pin.querySelector('.travel-atlas__hit').setAttribute('r', 12 * unit);
+      pin.querySelector('.travel-atlas__halo').setAttribute('r', 7 * unit);
+      pin.querySelector('.travel-atlas__dot').setAttribute('r', 4 * unit);
+    });
+  }
+  function setView(next, regionName) {
+    view = next.slice();
+    svg.setAttribute('viewBox', view.join(' '));
+    atlas.querySelectorAll('[data-travel-view]').forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.dataset.travelView === regionName));
+    });
+    sizePins();
+  }
+  function clearSelection() {
+    selectedId = null;
+    atlas.querySelector('[data-place-years]').textContent = activeYear === 'all' ? '2019–2026' : activeYear === 'recent' ? '2024–2026' : activeYear;
+    atlas.querySelector('[data-place-name]').textContent = 'Somewhere along the way.';
+    atlas.querySelector('[data-place-region]').textContent = 'Select a place to explore its visit years.';
+    atlas.querySelector('[data-place-map-link]').hidden = true;
+    atlas.querySelectorAll('[data-list-place], [data-map-place]').forEach(function (button) {
+      button.setAttribute('aria-pressed', 'false');
+    });
+  }
+  function selectPlace(id, focusRegion) {
+    var place = locations.find(function (entry) { return entry.id === id; });
+    if (!place || !isVisible(place)) return;
+    selectedId = id;
+    atlas.querySelector('[data-place-years]').textContent = place.years.join(' · ');
+    atlas.querySelector('[data-place-name]').textContent = place.name;
+    atlas.querySelector('[data-place-region]').textContent = place.region;
+    var link = atlas.querySelector('[data-place-map-link]');
+    var plotted = Number.isFinite(place.lon) && Number.isFinite(place.lat);
+    link.hidden = !plotted;
+    if (plotted) link.href = 'https://www.openstreetmap.org/?mlat=' + place.lat + '&mlon=' + place.lon + '#map=10/' + place.lat + '/' + place.lon;
+    atlas.querySelectorAll('[data-list-place], [data-map-place]').forEach(function (button) {
+      button.setAttribute('aria-pressed', String((button.dataset.listPlace || button.dataset.mapPlace) === id));
+    });
+    // Draw the selected pin last, so nearby markers cannot cover it.
+    var pin = pins.find(function (entry) { return entry.dataset.mapPlace === id; });
+    if (pin) svg.appendChild(pin);
+    if (focusRegion && plotted) setView(regions[place.view], place.view);
+  }
+  function applyFilter(year) {
+    activeYear = year;
+    atlas.querySelectorAll('[data-travel-filter]').forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.dataset.travelFilter === year));
+    });
+    atlas.querySelector('[data-travel-earlier]').value = ['2023','2022','2019'].includes(year) ? year : '';
+    items.forEach(function (item) {
+      item.hidden = !isVisible(locations.find(function (place) { return place.id === item.dataset.placeItem; }));
+    });
+    pins.forEach(function (pin) {
+      var hidden = !isVisible(locations.find(function (place) { return place.id === pin.dataset.mapPlace; }));
+      pin.style.display = hidden ? 'none' : '';
+      pin.setAttribute('tabindex', hidden ? '-1' : '0');
+      pin.setAttribute('aria-hidden', String(hidden));
+    });
+    var visible = locations.filter(isVisible);
+    var years = new Set(visible.flatMap(function (place) { return place.years.filter(function (y) { return activeYear === 'all' || (activeYear === 'recent' ? y >= 2024 && y <= 2026 : y === Number(activeYear)); }); }));
+    atlas.querySelector('[data-travel-count]').textContent = visible.length + ' places · ' + (years.size > 1 ? years.size + ' years' : activeYear);
+    clearSelection();
+    var onlyRegion = visible.length && visible.every(function (place) { return place.view === visible[0].view; });
+    var region = onlyRegion ? visible[0].view : 'world';
+    setView(regions[region], region);
+  }
+  atlas.querySelector('[data-travel-earlier]').addEventListener('change', function (event) {
+    if (event.target.value) applyFilter(event.target.value);
+  });
+  atlas.addEventListener('click', function (event) {
+    var filter = event.target.closest('[data-travel-filter]');
+    if (filter) { applyFilter(filter.dataset.travelFilter); return; }
+    var regionButton = event.target.closest('[data-travel-view]');
+    if (regionButton) { setView(regions[regionButton.dataset.travelView], regionButton.dataset.travelView); return; }
+    var placeButton = event.target.closest('[data-list-place], [data-map-place]');
+    if (placeButton) { selectPlace(placeButton.dataset.listPlace || placeButton.dataset.mapPlace, Boolean(placeButton.dataset.listPlace)); return; }
+    var zoom = event.target.closest('[data-travel-zoom]');
+    if (!zoom) return;
+    if (zoom.dataset.travelZoom === 'reset') { setView(regions.world, 'world'); return; }
+    var factor = zoom.dataset.travelZoom === 'in' ? 0.6 : 1 / 0.6;
+    var width = Math.min(360, Math.max(3, view[2] * factor));
+    var height = width * view[3] / view[2];
+    var selected = locations.find(function (place) { return place.id === selectedId; });
+    var cx = selected && Number.isFinite(selected.lon) ? selected.lon + 180 : view[0] + view[2] / 2;
+    var cy = selected && Number.isFinite(selected.lat) ? 90 - selected.lat : view[1] + view[3] / 2;
+    setView([cx - width / 2, cy - height / 2, width, height]);
+  });
+  pins.forEach(function (pin) {
+    pin.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        selectPlace(pin.dataset.mapPlace, false);
+      }
+    });
+  });
+  function point(event) {
+    var p = svg.createSVGPoint(); p.x = event.clientX; p.y = event.clientY;
+    return p.matrixTransform(svg.getScreenCTM().inverse());
+  }
+  svg.addEventListener('pointerdown', function (event) {
+    if (event.button !== 0 || event.target.closest('[data-map-place]')) return;
+    var p = point(event);
+    drag = { x: p.x, y: p.y, pointerId: event.pointerId };
+    svg.setPointerCapture(event.pointerId);
+    svg.classList.add('is-dragging');
+  });
+  svg.addEventListener('pointermove', function (event) {
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    var p = point(event);
+    setView([Math.max(-180, Math.min(540 - view[2], view[0] + drag.x - p.x)), Math.max(-90, Math.min(270 - view[3], view[1] + drag.y - p.y)), view[2], view[3]]);
+  });
+  function stopDrag(event) {
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    drag = null;
+    svg.classList.remove('is-dragging');
+    if (svg.hasPointerCapture(event.pointerId)) svg.releasePointerCapture(event.pointerId);
+  }
+  svg.addEventListener('pointerup', stopDrag);
+  svg.addEventListener('pointercancel', stopDrag);
+  svg.addEventListener('lostpointercapture', stopDrag);
+  if (window.ResizeObserver) new ResizeObserver(sizePins).observe(svg);
+  else window.addEventListener('resize', sizePins);
+  sizePins();
+})();
+</script>

@@ -46,7 +46,9 @@
 {% endif %}
 
 <meta property="og:type" content="{{ og_type }}">
-<meta property="og:locale" content="{{ site.locale | replace: "-", "_" | default: "en_US" }}">
+{% assign og_locale = page.locale | default: site.locale | replace: "-", "_" %}
+{% if og_locale == "en" %}{% assign og_locale = "en_US" %}{% endif %}
+<meta property="og:locale" content="{{ og_locale | default: "en_US" }}">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:title" content="{{ page_title }}">
 <meta property="og:url" content="{{ canonical_url }}">

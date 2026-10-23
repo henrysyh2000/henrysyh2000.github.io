@@ -1,0 +1,15 @@
+# Local build/cache output (legacy tracked _site files remain tracked)
+/_site/
+/.jekyll-cache/
+/.sass-cache/
+/.bundle/
+/vendor/
+
+# The writing vault must remain separate from this public repository.
+/Public/
+/Private/
+/.obsidian/
+/.publishing/
+
+# Local research discussion notes
+/sparkling-whiteboard.md

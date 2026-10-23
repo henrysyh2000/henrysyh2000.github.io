@@ -1,3 +1,4 @@
+{% unless page.collection == 'posts' or page.layout == 'blog-index' or page.layout == 'posts' %}
 {% if page.author_profile or layout.author_profile or page.sidebar %}
   <div class="sidebar sticky">
   {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
@@ -17,3 +18,4 @@
   {% endif %}
   </div>
 {% endif %}
+{% endunless %}

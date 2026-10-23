@@ -13,12 +13,12 @@ main:
   - title: "Blog"
     url: /blog/
   - title: "CV"
-    url: /assets/pdf/Henry_Resume.pdf
+    url: /cv/
 
 # life links
 life:
   - title: "Travel"
     url: "#travel"
-  - title: "Snooker"
-    url: "#snooker"
+  - title: "GTI Mark 8"
+    url: "#gti-mark-8"
 

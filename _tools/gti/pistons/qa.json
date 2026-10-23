@@ -1,0 +1,25 @@
+{
+  "artifact": "assets/gti/ea888-pistons.html",
+  "status": "Website publication approved 2026-10-23; English UI prepared without changing geometry",
+  "parts": {
+    "physical_groups_and_parts": 42,
+    "sortable_render_items": 247,
+    "recorded_solids": 234
+  },
+  "verified": {
+    "kinematics": "1,441 half-degree samples over 720 degrees; stroke, rod length and paired phases",
+    "painter_order": "360 integer crank angles plus 101 separation states, ray sampled at 1 viewBox px, 0 reported problems",
+    "assembled_anatomy_audit": "passed, including actual drawn order; 0 problems on all reported checks",
+    "analytical_checks": "deck clearance and clip-before-pin / pin-before-lift / ring-expansion-before-lift sequencing",
+    "runtime": "Chinese and English DOM simulation: play/pause, 6 angles, disassembly, selection, gallery, reset, theme, zoom; no invalid coordinates or duplicate nodes",
+    "reduced_motion": "autoplay off; manual angles and instant separation work",
+    "visual": "SVG artwork inspected assembled/apart in light/dark, at 4x detail, plus 390px artwork and gallery section",
+    "publication_language": "English-only UI; all SVG drawings byte-identical before/after language preparation; local bilingual Obsidian copy preserved"
+  },
+  "limits": [
+    "Browser desktop/phone screenshots and the browser-based line-end checker were unavailable; DOM simulation is not browser layout verification.",
+    "Sampled painter checks are not a mathematical proof between samples or a full swept-solid collision proof.",
+    "Exterior geometry, drawing clearances, ring construction and cooling gallery are illustrative, not identified GTI production dimensions.",
+    "No oil-flow, temperature, force, load, combustion or real-RPM simulation."
+  ]
+}

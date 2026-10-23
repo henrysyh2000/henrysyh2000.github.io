@@ -19,7 +19,6 @@ layout: default
 {% endif %}
 
 <div id="main" role="main">
-  {% include sidebar.html %}
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork"{% if page.locale %} lang="{{ page.locale }}"{% endif %}>
     {% if page.title %}<meta itemprop="headline" content="{{ page.title | replace: '|', '&#124;' | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
@@ -38,6 +37,9 @@ layout: default
           {% include page__meta.html %}
         </header>
       {% endunless %}
+
+      {% include blog-language-switch.html %}
+      {% include blog-series-label.html article=page %}
 
       <section class="page__content" itemprop="text">
         {% if page.toc %}

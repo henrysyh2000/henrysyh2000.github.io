@@ -1,0 +1,81 @@
+{
+  "tier": "Figure",
+  "concept": "A crankshaft drives four slider-cranks; the fourth piston's rings and pin separate to expose sealing and attachment, and a separate cutaway reveals the reference drawing's cooling gallery.",
+  "scope": "Original teaching reconstruction inspired by the user's VW SSP image. Not OEM CAD, production tolerances, a combustion simulation or an assertion that the user's GTI uses the pictured gallery piston.",
+  "model": {
+    "stroke_mm": 92.8,
+    "rod_reference_mm": 144,
+    "crank_phases_deg": [
+      0,
+      180,
+      180,
+      0
+    ],
+    "rod_scope": "Audi evo4 research-engine reference; Canadian2024GTI part match outstanding",
+    "other_geometry": "Illustrative, including cylinder spacing, piston exterior, pin and ring sizes."
+  },
+  "parts": {
+    "display_fixture": [
+      "base casting",
+      "left pedestal",
+      "right pedestal",
+      "left bearing housing",
+      "right bearing housing",
+      "foot 1",
+      "foot 2",
+      "foot 3",
+      "foot 4"
+    ],
+    "crankshaft": [
+      "one crankshaft with five main-journal regions, eight webs, four crankpins, counterweights and an end flange"
+    ],
+    "cylinder_1": [
+      "piston casting",
+      "top compression ring",
+      "second ring",
+      "oil-control ring assembly",
+      "wrist pin",
+      "left circlip",
+      "right circlip",
+      "connecting-rod envelope"
+    ],
+    "cylinder_2": [
+      "piston casting",
+      "top compression ring",
+      "second ring",
+      "oil-control ring assembly",
+      "wrist pin",
+      "left circlip",
+      "right circlip",
+      "connecting-rod envelope"
+    ],
+    "cylinder_3": [
+      "piston casting",
+      "top compression ring",
+      "second ring",
+      "oil-control ring assembly",
+      "wrist pin",
+      "left circlip",
+      "right circlip",
+      "connecting-rod envelope"
+    ],
+    "cylinder_4": [
+      "piston casting",
+      "top compression ring",
+      "second ring",
+      "oil-control ring assembly",
+      "wrist pin",
+      "left circlip",
+      "right circlip",
+      "connecting-rod envelope"
+    ]
+  },
+  "cooling_scope": "SSP822223 illustrates a gallery. AudiSSP683 distinguishes PC3 cooling-gallery piston changes from PC2; the animation cannot identify this GTI's piston part number.",
+  "sources": [
+    "https://content.datarunners.net/content/SSP/822223.pdf#page=8",
+    "https://mediatum.ub.tum.de/doc/1688266/1688266.pdf#page=71",
+    "https://audi.erwin-store.com/erwin/showArticleProperties.do?articleId=94136"
+  ],
+  "physical_part_count": 42,
+  "rendering_note": "Integral casting features and curved bodies are split into painter-sortable pieces. Rod cap, bearing shells and fastener locations are not separately dimensioned or decomposed."
+}

@@ -1,96 +1,110 @@
 <div id="tab-travel" class="life-tab">
   <main class="travel-layout">
-    <section class="travel-overview" aria-labelledby="travel-overview-title">
-      <h2 id="travel-overview-title" class="archive__subtitle">Make the World My Major!</h2>
-      <p>
-        This is an adaptation of NYUSH's motto "Make the world your major".
-        Having spent four wonderful years there, this motto has constantly motivated me to explore more cities and landscapes,
-        dive into their cultures, and learn from these experiences worldwide.
-      </p>
-      <p>
-        I tend to wander into the everyday parts of a city rather than collect its landmarks. The timeline below follows the
-        small details, quiet corners, and unplanned encounters that made me stop and look twice.
-      </p>
-    </section>
+    <header class="travel-overview">
+      <p class="travel-eyebrow">LIFE / TRAVEL</p>
+      <h2 id="travel-overview-title">Places, over the years.</h2>
+      <p>Make the world my major. A few places I have spent time in, and small things I wanted to remember.</p>
+    </header>
 
-    <section id="travel-timeline" class="travel-story" aria-labelledby="travel-timeline-title">
-      <!-- <header class="travel-story__header">
-        <h2 id="travel-timeline-title" class="archive__subtitle">What Made Me Stop</h2>
-        <p>
-          I tend to wander into the everyday parts of a city rather than collect its landmarks. The timeline below follows the
-          small details, quiet corners, and unplanned encounters that made me stop and look twice.
-        </p>
-      </header> -->
-
-      <div class="travel-counter" data-travel-counter>
-        <div class="travel-counter__display" aria-live="polite">
-          {% for travel_year in site.data.travel.years %}
-            {% assign year_moments = site.data.travel.moments | where: "year", travel_year.year %}
-            <article
-              class="travel-counter__panel"
-              data-travel-year-panel
-              data-year="{{ travel_year.year }}"
-              data-index="{{ forloop.index0 }}"
-              {% unless forloop.first %}hidden{% endunless %}
-            >
-              <div class="travel-counter__year-picker">
-                <button
-                  class="travel-counter__arrow"
-                  type="button"
-                  data-travel-step="-1"
-                  aria-label="Show newer year"
-                  {% if forloop.first %}disabled{% endif %}
-                >
-                  <span aria-hidden="true">↑</span>
-                </button>
-
-                {% if year_moments.size > 0 %}
-                  <button
-                    class="travel-counter__year"
-                    type="button"
-                    data-travel-year-trigger
-                    aria-expanded="false"
-                  >
-                    {{ travel_year.year }}
-                  </button>
-                {% else %}
-                  <div class="travel-counter__year">{{ travel_year.year }}</div>
-                {% endif %}
-
-                <button
-                  class="travel-counter__arrow"
-                  type="button"
-                  data-travel-step="1"
-                  aria-label="Show older year"
-                  {% if forloop.last %}disabled{% endif %}
-                >
-                  <span aria-hidden="true">↓</span>
-                </button>
-              </div>
-              <p class="travel-counter__places">{{ travel_year.places }}</p>
-
-              {% if year_moments.size > 0 %}
-                <div class="travel-counter__moments" data-travel-moments aria-hidden="true">
-                  {% for moment in year_moments %}
-                    <figure class="travel-moment">
-                      <img src="{{ moment.image | relative_url }}" alt="{{ moment.alt }}" loading="lazy" />
-                      <figcaption>
-                        <div class="travel-moment__meta">
-                          <time datetime="{{ moment.year }}">{{ moment.date }}, {{ moment.year }}</time>
-                          <span aria-hidden="true">·</span>
-                          <span>{{ moment.place }}</span>
-                        </div>
-                        <h3>{{ moment.title }}</h3>
-                        <p>{{ moment.caption }}</p>
-                      </figcaption>
-                    </figure>
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </article>
-          {% endfor %}
+    <section class="travel-atlas" data-travel-atlas aria-labelledby="travel-overview-title">
+      <div class="travel-atlas__toolbar">
+        <div class="travel-atlas__filters" role="group" aria-label="Filter places by year">
+          <button type="button" data-travel-filter="all" aria-pressed="true">All years</button>
+          <button type="button" data-travel-filter="recent" aria-pressed="false">2024–2026</button>
+          <button type="button" data-travel-filter="2026" aria-pressed="false">2026</button>
+          <button type="button" data-travel-filter="2025" aria-pressed="false">2025</button>
+          <button type="button" data-travel-filter="2024" aria-pressed="false">2024</button>
+          <label class="travel-atlas__earlier-filter"><span class="screen-reader-text">Earlier year</span><select data-travel-earlier aria-label="Earlier year"><option value="">Earlier years</option><option value="2023">2023</option><option value="2022">2022</option><option value="2019">2019</option></select></label>
         </div>
+        <p class="travel-atlas__count" data-travel-count aria-live="polite">{{ site.data.travel.locations.size }} places · {{ site.data.travel.years.size }} years</p>
       </div>
+
+      <div class="travel-atlas__body">
+        <div class="travel-atlas__map-column">
+          <div class="travel-atlas__regions" role="group" aria-label="Map region">
+            <button type="button" data-travel-view="world" aria-pressed="true">World</button>
+            <button type="button" data-travel-view="north-america" aria-pressed="false">North America</button>
+            <button type="button" data-travel-view="europe" aria-pressed="false">Europe</button>
+            <button type="button" data-travel-view="east-asia" aria-pressed="false">East Asia</button>
+          </div>
+          <div class="travel-atlas__canvas">
+            <svg class="travel-atlas__map" viewBox="0 5 360 170" role="group" aria-labelledby="travel-map-title travel-map-desc" data-travel-map>
+              <title id="travel-map-title">Places I visited, 2019 to 2026</title>
+              <desc id="travel-map-desc">Select a point or use the place list. Use the region and zoom buttons to explore. Markers show approximate locations, not routes.</desc>
+              <rect x="-540" y="-180" width="1440" height="540" class="travel-atlas__water" aria-hidden="true"/>
+              <g class="travel-atlas__graticule" aria-hidden="true">
+                <path d="M0 30H360M0 60H360M0 90H360M0 120H360M0 150H360M60 0V180M120 0V180M180 0V180M240 0V180M300 0V180"/>
+              </g>
+              {% include travel-land.svg %}
+              {% for place in site.data.travel.locations %}
+                {% if place.lon %}
+                  {% assign marker_x = place.lon | plus: 180 %}
+                  {% assign marker_y = 90 | minus: place.lat %}
+                  <g class="travel-atlas__pin" transform="translate({{ marker_x }} {{ marker_y }})" data-map-place="{{ place.id }}" data-place-year="{{ place.years | join: ',' }}" tabindex="0" role="button" aria-label="{{ place.name | escape }}, {{ place.years | join: ', ' }}" aria-pressed="false">
+                    <title>{{ place.name }} · {{ place.years | join: ', ' }}</title>
+                    <circle class="travel-atlas__hit" r="5.5"/>
+                    <circle class="travel-atlas__halo" r="2.3"/>
+                    <circle class="travel-atlas__dot" r="1.5"/>
+                  </g>
+                {% endif %}
+              {% endfor %}
+            </svg>
+            <div class="travel-atlas__zoom" role="group" aria-label="Map zoom">
+              <button type="button" data-travel-zoom="in" aria-label="Zoom in">+</button>
+              <button type="button" data-travel-zoom="out" aria-label="Zoom out">−</button>
+              <button type="button" data-travel-zoom="reset" aria-label="Reset map to world view">↺</button>
+            </div>
+          </div>
+          <div class="travel-atlas__map-footer">
+            <span>Select a point or place. Drag to pan.</span>
+            <a href="https://www.naturalearthdata.com/">Map: Natural Earth</a>
+          </div>
+        </div>
+
+        <aside class="travel-atlas__sidebar" aria-label="Travel places">
+          <div class="travel-atlas__selection" aria-live="polite" aria-atomic="true">
+            <p class="travel-eyebrow" data-place-years>2019–2026</p>
+            <h3 data-place-name>Somewhere along the way.</h3>
+            <p data-place-region>Select a place to explore its visit years.</p>
+            <a data-place-map-link hidden target="_blank" rel="noopener noreferrer">Open map ↗</a>
+          </div>
+          <ul class="travel-atlas__places" aria-label="Places visited" data-travel-place-list>
+            {% for place in site.data.travel.locations %}
+              <li data-place-item="{{ place.id }}" data-place-year="{{ place.years | join: ',' }}">
+                <button type="button" data-list-place="{{ place.id }}" aria-pressed="false">
+                  <span>{{ place.name }}</span><small>{{ place.years | join: ', ' }}</small>
+                </button>
+              </li>
+            {% endfor %}
+          </ul>
+        </aside>
+      </div>
+      <p class="travel-atlas__note">Approximate place markers; no travel route or order is implied.</p>
+      <noscript><p>The place list and earlier photo notes are available without JavaScript. Enable JavaScript for map filters and zoom.</p></noscript>
+      <script type="application/json" data-travel-locations>{{ site.data.travel.locations | jsonify }}</script>
     </section>
+
+    <details class="travel-earlier">
+      <summary>Earlier places &amp; photo notes <span>2019–2023</span></summary>
+      <div class="travel-earlier__years">
+        {% for travel_year in site.data.travel.years %}
+          {% if travel_year.year < 2024 %}
+            <div><h3>{{ travel_year.year }}</h3><p>{{ travel_year.places }}</p></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="travel-photo-notes">
+        {% for moment in site.data.travel.moments %}
+          <figure class="travel-moment">
+            <img src="{{ moment.image | relative_url }}" alt="{{ moment.alt | escape }}" loading="lazy"/>
+            <figcaption>
+              <div class="travel-moment__meta"><time datetime="{{ moment.year }}">{{ moment.date }}, {{ moment.year }}</time> · {{ moment.place }}</div>
+              <h3>{{ moment.title }}</h3>
+              <p>{{ moment.caption }}</p>
+            </figcaption>
+          </figure>
+        {% endfor %}
+      </div>
+    </details>
   </main>
 </div>

@@ -1,152 +1,91 @@
 <!-- start custom footer snippets -->
+<script>
+(function () {
+  'use strict';
+  var toggle = document.getElementById('mode-switch');
+  var researchNav = document.querySelector('.visible-links:not(.visible-links--life)');
+  var lifeNav = document.querySelector('.visible-links--life');
+  var researchContent = document.querySelector('.mode-content--research');
+  var lifeContent = document.querySelector('.mode-content--life');
+  var lifeTabs = document.querySelectorAll('.life-tab');
+  var nativeLifePage = document.body.getAttribute('data-life-page');
+  var currentLifeTab = nativeLifePage || 'travel';
 
-  <script>
-    (function () {
-      var toggle = document.getElementById('mode-switch');
-      var researchNav = document.querySelector('.visible-links:not(.visible-links--life)');
-      var lifeNav = document.querySelector('.visible-links--life');
-      var researchContent = document.querySelector('.mode-content--research');
-      var lifeContent = document.querySelector('.mode-content--life');
-      var lifeTabs = document.querySelectorAll('.life-tab');
+  window.addEventListener('message', function (event) {
+    var data = event.data;
+    if (!data || data.type !== 'gti-anatomy-height' || !Number.isFinite(data.height)) return;
+    document.querySelectorAll('iframe.gti-anatomy').forEach(function (frame) {
+      if (event.source === frame.contentWindow) frame.style.height = Math.max(420, Math.min(1800, data.height)) + 'px';
+    });
+  });
 
-      function showLifeTab(name) {
-        var tabId = 'tab-' + name;
-        lifeTabs.forEach(function (tab) {
-          tab.style.display = tab.id === tabId ? '' : 'none';
-        });
-      }
-
-      function setMode(isLife) {
-        toggle.checked = isLife;
-        if (isLife) {
-          if (researchNav) researchNav.style.display = 'none';
-          if (lifeNav) lifeNav.style.display = '';
-          if (researchContent) researchContent.style.display = 'none';
-          if (lifeContent) lifeContent.style.display = '';
-          showLifeTab('travel');
-        } else {
-          if (researchNav) researchNav.style.display = '';
-          if (lifeNav) lifeNav.style.display = 'none';
-          if (researchContent) researchContent.style.display = '';
-          if (lifeContent) lifeContent.style.display = 'none';
-        }
-      }
-
-      // Always start in Research mode
-      setMode(false);
-
-      // Toggle switch changes mode
-      if (toggle) {
-        toggle.addEventListener('change', function () {
-          setMode(toggle.checked);
-        });
-      }
-
-      // Life tab navigation
-      if (lifeNav) {
-        lifeNav.addEventListener('click', function (e) {
-          var link = e.target.closest('a');
-          if (!link) return;
-          var href = link.getAttribute('href');
-          if (href === '/') {
-            setMode(false);
-            e.preventDefault();
-          } else if (href && href.startsWith('#')) {
-            e.preventDefault();
-            showLifeTab(href.substring(1));
-          }
-        });
-      }
-
-      // Travel year counter controls
-      var travelCounter = document.querySelector('[data-travel-counter]');
-      if (travelCounter) {
-        var yearPanels = Array.prototype.slice.call(travelCounter.querySelectorAll('[data-travel-year-panel]'));
-        var activeYearIndex = 0;
-        var counterIsAnimating = false;
-        var reduceCounterMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        function closePhotoNotes(panel) {
-          if (!panel) return;
-          panel.classList.remove('is-previewing');
-          var trigger = panel.querySelector('[data-travel-year-trigger]');
-          var moments = panel.querySelector('[data-travel-moments]');
-          if (trigger) trigger.setAttribute('aria-expanded', 'false');
-          if (moments) moments.setAttribute('aria-hidden', 'true');
-        }
-
-        function showTravelYear(index, animate) {
-          index = Math.max(0, Math.min(yearPanels.length - 1, index));
-          if (counterIsAnimating || (animate && index === activeYearIndex)) return;
-
-          var outgoingPanel = yearPanels[activeYearIndex];
-          var incomingPanel = yearPanels[index];
-          var direction = index > activeYearIndex ? 'older' : 'newer';
-
-          yearPanels.forEach(closePhotoNotes);
-
-          if (!animate || reduceCounterMotion) {
-            yearPanels.forEach(function (panel, panelIndex) {
-              panel.hidden = panelIndex !== index;
-            });
-            activeYearIndex = index;
-            return;
-          }
-
-          counterIsAnimating = true;
-          incomingPanel.hidden = false;
-          outgoingPanel.classList.add('is-counter-leaving', 'is-counter-leaving--' + direction);
-          incomingPanel.classList.add('is-counter-entering', 'is-counter-entering--' + direction);
-          activeYearIndex = index;
-
-          window.setTimeout(function () {
-            outgoingPanel.hidden = true;
-            outgoingPanel.classList.remove('is-counter-leaving', 'is-counter-leaving--' + direction);
-            incomingPanel.classList.remove('is-counter-entering', 'is-counter-entering--' + direction);
-            counterIsAnimating = false;
-          }, 430);
-        }
-
-        travelCounter.addEventListener('click', function (e) {
-          var arrow = e.target.closest('[data-travel-step]');
-          if (!arrow || arrow.disabled) return;
-          showTravelYear(activeYearIndex + Number(arrow.getAttribute('data-travel-step')), true);
-        });
-
-        yearPanels.forEach(function (panel) {
-          var trigger = panel.querySelector('[data-travel-year-trigger]');
-          var moments = panel.querySelector('[data-travel-moments]');
-          if (!trigger || !moments) return;
-
-          function openPhotoNotes() {
-            panel.classList.add('is-previewing');
-            trigger.setAttribute('aria-expanded', 'true');
-            moments.setAttribute('aria-hidden', 'false');
-          }
-
-          trigger.addEventListener('click', function () {
-            if (panel.classList.contains('is-previewing')) {
-              closePhotoNotes(panel);
-            } else {
-              openPhotoNotes();
-            }
-          });
-          panel.addEventListener('mouseleave', function () {
-            closePhotoNotes(panel);
-          });
-        });
-
-        showTravelYear(0, false);
-      }
-
-      // Home link resets to Research
-      document.addEventListener('click', function (e) {
-        var link = e.target.closest('a');
-        if (link && link.getAttribute('href') === '/') {
-          setMode(false);
-        }
-      });
-    })();
-  </script>
-
+  function tabFromHash(hash) {
+    var name = hash.substring(1);
+    return name === 'travel' || name === 'gti-mark-8' ? name : null;
+  }
+  function sameDocument(url) {
+    return url.origin === window.location.origin && url.pathname === window.location.pathname && url.search === window.location.search;
+  }
+  function showLifeTab(name) {
+    currentLifeTab = name;
+    if (researchContent) researchContent.style.display = nativeLifePage === name ? '' : 'none';
+    if (lifeContent) lifeContent.style.display = nativeLifePage === name ? 'none' : '';
+    lifeTabs.forEach(function (tab) {
+      tab.style.display = tab.id === 'tab-' + name ? '' : 'none';
+    });
+    if (lifeNav) lifeNav.querySelectorAll('a').forEach(function (link) {
+      var target = new URL(link.getAttribute('href'), window.location.href);
+      if (target.hash === '#' + name) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  }
+  function setMode(isLife, tab) {
+    if (toggle) toggle.checked = isLife;
+    if (researchNav) researchNav.style.display = isLife ? 'none' : '';
+    if (lifeNav) lifeNav.style.display = isLife ? '' : 'none';
+    if (isLife) showLifeTab(tab || currentLifeTab);
+    else {
+      if (researchContent) researchContent.style.display = '';
+      if (lifeContent) lifeContent.style.display = 'none';
+    }
+  }
+  function syncLocation() {
+    var tab = tabFromHash(window.location.hash);
+    setMode(Boolean(tab || nativeLifePage), tab || nativeLifePage || currentLifeTab);
+  }
+  function updateHash(hash) {
+    if (window.location.hash !== hash) window.history.pushState(null, '', hash || window.location.pathname + window.location.search);
+  }
+  syncLocation();
+  // Same-page anchor changes do not reload scripts. Handle clicks, deep links,
+  // and browser history consistently in both the site and file previews.
+  window.addEventListener('hashchange', syncLocation);
+  window.addEventListener('popstate', syncLocation);
+  if (toggle) toggle.addEventListener('change', function () {
+    setMode(toggle.checked);
+    if (toggle.checked) updateHash('#' + currentLifeTab);
+    else if (tabFromHash(window.location.hash)) updateHash('');
+  });
+  if (lifeNav) lifeNav.addEventListener('click', function (event) {
+    var link = event.target.closest('a');
+    if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    var target = new URL(link.getAttribute('href'), window.location.href);
+    var tab = tabFromHash(target.hash);
+    if (!tab || !sameDocument(target)) return;
+    event.preventDefault();
+    setMode(true, tab);
+    updateHash(target.hash);
+  });
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest('.site-wordmark, .visible-links:not(.visible-links--life) a');
+    if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    var target = new URL(link.getAttribute('href'), window.location.href);
+    if (target.hash || !sameDocument(target)) return;
+    event.preventDefault();
+    setMode(false);
+    updateHash('');
+  });
+})();
+</script>
+{% include travel-atlas.js.html %}
 <!-- end custom footer snippets -->

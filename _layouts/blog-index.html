@@ -1,0 +1,37 @@
+---
+layout: archive
+---
+
+{% include blog-language-switch.html %}
+{{ content }}
+{% include blog-series-nav.html %}
+
+{% assign blog_posts = site.posts | where_exp: "item", "item.hidden != true" %}
+{% if page.lang == 'en' %}
+  {% assign blog_posts = blog_posts | where_exp: "item", "item.lang == 'en' or item.lang == nil" %}
+{% else %}
+  {% assign blog_posts = blog_posts | where: 'lang', page.lang %}
+{% endif %}
+{% if page.series %}
+  {% assign blog_posts = blog_posts | where: 'series', page.series %}
+{% endif %}
+{% assign years = blog_posts | group_by_exp: 'post', 'post.date | date: "%Y"' %}
+{% if blog_posts.size == 0 %}
+  <p>{% if page.lang == 'zh-CN' %}文章正在准备中。{% else %}New articles are on the way.{% endif %}</p>
+{% else %}
+{% if years.size > 1 %}
+<ul class="taxonomy__index">
+  {% for year in years %}
+  <li><a href="#{{ year.name }}"><strong>{{ year.name }}</strong> <span class="taxonomy__count">{{ year.items | size }}</span></a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% for year in years %}
+<section id="{{ year.name }}" class="taxonomy__section">
+  <h2 class="archive__subtitle">{{ year.name }}</h2>
+  <div class="entries-list">
+    {% for post in year.items %}{% include archive-single.html type='list' show_date=true %}{% endfor %}
+  </div>
+</section>
+{% endfor %}
+{% endif %}
