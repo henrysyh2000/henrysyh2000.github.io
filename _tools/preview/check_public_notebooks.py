@@ -22,7 +22,14 @@ for slug in slugs:
  content=re.search(r'<section class="page__content"[^>]*>([\s\S]*?)</section>',s).group(1)
  parsed=HTML();parsed.feed(content);text=' '.join(parsed.text)
  assert '<table' not in content and '<img' not in content and '<pre' not in content,slug
- assert not re.search(r'\d+\.\d+|\d+%|\bK\s*=|λ|LLaMA|AnaloBench|GPT-4o',text),slug
+ if slug.endswith('hidden-state-interventions'):
+  # Explicit user exception: only the named one-story visualization.
+  assert 'one source story' in text and 'single-example view' in text,slug
+  assert 'sandbox="allow-scripts"' in content,slug
+  assert '/assets/research-notebook/2026-10-22/concept-trajectories.html' in content,slug
+  checked=text.replace('LLaMA 3.1','')
+ else:checked=text
+ assert not re.search(r'\d+\.\d+|\d+%|\bK\s*=|λ|LLaMA|AnaloBench|GPT-4o',checked),slug
  assert 'private notes' in text,slug
  assert 'status: draft' not in s
 issues=[];pages=0
@@ -45,4 +52,4 @@ for name in ['feed.xml','search.json','assets/js/lunr/lunr-store.js']:
 assert not (root/'Document').exists()
 for name in ['_tools','Private','Public','AGENTS.md','sparkling-whiteboard.md']:
  assert not (root/name).exists(),name
-print(json.dumps({'english_pages':pages,'notebook_privacy':'qualitative-only; no experiment tables, figures, measurements or settings','all_local_links':'passed','drafts_and_private_files':'excluded'}))
+print(json.dumps({'english_pages':pages,'notebook_privacy':'Notebook 01 qualitative only; Notebook 02 has the explicitly approved one-story visualization only','all_local_links':'passed','drafts_and_private_files':'excluded'}))

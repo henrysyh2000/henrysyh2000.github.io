@@ -1,0 +1,16 @@
+<figure class="research-visualization" style="margin: 1.5rem 0;">
+  <iframe id="research-visualization" src="{{ research_visualization.path | relative_url }}"
+    title="{{ research_visualization.title | escape }}" loading="lazy" sandbox="allow-scripts"
+    height="2500" style="display: block; width: 100%; border: 1px solid #dce1dc; border-radius: 10px;"></iframe>
+  <figcaption><a href="{{ research_visualization.path | relative_url }}" target="_blank" rel="noopener">Open the interactive visualization in a full window ↗</a></figcaption>
+</figure>
+<script>
+(() => {
+  const frame = document.getElementById('research-visualization');
+  window.addEventListener('message', event => {
+    const data = event.data;
+    if (event.source !== frame.contentWindow || !data || data.type !== 'research-visualization-height' || !Number.isFinite(data.height)) return;
+    frame.style.height = Math.max(600, Math.min(16000, data.height)) + 'px';
+  });
+})();
+</script>
