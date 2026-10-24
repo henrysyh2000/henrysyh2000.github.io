@@ -1,16 +1,20 @@
-<figure class="research-visualization" style="margin: 1.5rem 0;">
-  <iframe id="research-visualization" src="{{ research_visualization.path | relative_url }}"
-    title="{{ research_visualization.title | escape }}" loading="lazy" sandbox="allow-scripts"
-    height="2500" style="display: block; width: 100%; border: 1px solid #dce1dc; border-radius: 10px;"></iframe>
-  <figcaption><a href="{{ research_visualization.path | relative_url }}" target="_blank" rel="noopener">Open the interactive visualization in a full window ↗</a></figcaption>
-</figure>
-<script>
-(() => {
-  const frame = document.getElementById('research-visualization');
-  window.addEventListener('message', event => {
-    const data = event.data;
-    if (event.source !== frame.contentWindow || !data || data.type !== 'research-visualization-height' || !Number.isFinite(data.height)) return;
-    frame.style.height = Math.max(600, Math.min(16000, data.height)) + 'px';
-  });
-})();
-</script>
+<link rel="stylesheet" href="{{ '/assets/css/llama-trajectory.css' | relative_url }}">
+<section class="llama-trajectory" id="llama-trajectory" aria-labelledby="llama-title">
+  <h2 id="llama-title">LLaMA 3.1 · a single-example view</h2>
+  <p class="llama-source"><span>Source story</span> Don't judge people based on appearances alone; appearances can be deceptive.</p>
+  <div class="llama-sentences">
+    <div><h3>Analogy</h3><p id="llama-analogy">The quiet librarian proved to be a rebellious graffiti artist in her free time, leaving her readers in awe of her contrasting personas.</p></div>
+    <div><h3>Literal response</h3><p id="llama-literal">One should not make judgments about individuals solely based on their physical appearance.</p></div>
+  </div>
+  <div class="llama-controls">
+    <label for="llama-layer">Inspect a layer<select id="llama-layer" disabled><option>Loading layers…</option></select></label>
+    <label for="llama-step">Inspect a generated token<select id="llama-step" disabled><option>Loading tokens…</option></select></label>
+  </div>
+  <p id="llama-hint" class="llama-hint">Drag the cube to rotate. Click a point or use the selectors to inspect its layer and token step.</p>
+  <p id="llama-status" class="llama-status" role="status">Loading the interactive figure…</p>
+  <div id="llama-plot" class="llama-plot" role="img" aria-label="LLaMA 3.1 hidden-state trajectories: a token-by-layer cube, a PCA plane and a selected token slice" aria-describedby="llama-hint"></div>
+  <noscript><p>JavaScript is needed for the interactive cube. This example compares the analogy and literal response shown above.</p></noscript>
+</section>
+<script src="{{ '/assets/js/plotly-4.0.0.min.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/research-notebook/2026-10-22/llama-data.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/research-notebook/2026-10-22/llama-trajectory.js' | relative_url }}" defer></script>

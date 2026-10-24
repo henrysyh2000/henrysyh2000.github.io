@@ -1,0 +1,15 @@
+.site-design .llama-trajectory{margin:2rem 0 0;padding:0;border:0;background:transparent;min-width:0}
+.site-design .llama-trajectory h2{font-size:1.4rem;margin:0 0 1.2rem}
+.site-design .llama-source{padding:.8rem 0;border-top:1px solid #dce3eb;border-bottom:1px solid #dce3eb;font-size:.86rem;line-height:1.7}
+.site-design .llama-source span{display:block;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:#687487;margin-bottom:.25rem}
+.site-design .llama-sentences{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.4rem 0}
+.site-design .llama-sentences h3{font:600 .7rem/1.4 system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#687487;margin:0 0 .5rem}
+.site-design .llama-sentences p{font-size:.85rem;line-height:1.75;margin:0}
+.site-design .llama-controls{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.5rem 0 .7rem}
+.site-design .llama-controls label{font:500 .73rem/1.5 system-ui,sans-serif;color:#687487;margin:0}
+.site-design .llama-controls select{display:block;box-sizing:border-box;width:100%;min-height:44px;margin:.4rem 0 0;padding:.55rem .7rem;border:1px solid #ccd7e4;border-radius:4px;background:#fff;color:#263449;font:400 .8rem/1.4 system-ui,sans-serif}
+.site-design .llama-controls select:focus-visible{outline:3px solid #8cb3e8;outline-offset:3px}
+.site-design .llama-hint,.site-design .llama-status{font-size:.7rem;line-height:1.7;color:#687487;margin:.6rem 0}
+.site-design .llama-status[data-ready=true]{color:#244e9a}
+.site-design .llama-plot{width:100%;min-width:0;min-height:300px;margin:0;overflow:hidden}
+@media(max-width:600px){.site-design .llama-sentences,.site-design .llama-controls{grid-template-columns:1fr;gap:.9rem}.site-design .llama-trajectory h2{font-size:1.2rem}}

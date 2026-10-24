@@ -1,4 +1,4 @@
 research-notebook-2026-10-22-hidden-state-interventions:
-  path: /assets/research-notebook/2026-10-22/concept-trajectories.html
-  title: "Concept trajectories in 3D: one source story, with LLaMA 3.1 selected by default"
-  scope: single-source-story
+  model: llama-3.1
+  title: "LLaMA 3.1 concept trajectories: one source story"
+  scope: single-source-story-single-model

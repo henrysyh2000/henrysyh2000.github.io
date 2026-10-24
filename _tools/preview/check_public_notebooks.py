@@ -25,8 +25,9 @@ for slug in slugs:
  if slug.endswith('hidden-state-interventions'):
   # Explicit user exception: only the named one-story visualization.
   assert 'one source story' in text and 'single-example view' in text,slug
-  assert 'sandbox="allow-scripts"' in content,slug
-  assert '/assets/research-notebook/2026-10-22/concept-trajectories.html' in content,slug
+  assert '<iframe' not in content and 'id="llama-plot"' in content,slug
+  assert '/assets/research-notebook/2026-10-22/llama-data.js' in s,slug
+  assert not any(model in s for model in ['Gemma-2','Qwen3','Mistral-7B','Phi-4-mini']),slug
   checked=text.replace('LLaMA 3.1','')
  else:checked=text
  assert not re.search(r'\d+\.\d+|\d+%|\bK\s*=|λ|LLaMA|AnaloBench|GPT-4o',checked),slug
