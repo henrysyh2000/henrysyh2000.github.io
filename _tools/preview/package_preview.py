@@ -75,6 +75,27 @@ for name in routes.values():
  for url in re.findall(r'(?:href|src|data)="([^"]+)"',(out/name).read_text()):
   if url.startswith(('http:','https:','mailto:','#','data:','//')):continue
   assert (out/urlsplit(url).path).is_file(),(name,url)
+# Standalone interactive HTML assets may have their own local images/scripts.
+# Keep those dependencies in the portable preview, restricted to assets/.
+pending=[path for path in assets if path.endswith('.html')]
+seen=set()
+class AssetReferences(HTMLParser):
+ def __init__(self):super().__init__();self.refs=[]
+ def handle_starttag(self,tag,attrs):
+  self.refs.extend(value for key,value in attrs if key in ('href','src','data') and value)
+while pending:
+ path=pending.pop()
+ if path in seen:continue
+ seen.add(path)
+ refs=AssetReferences();refs.feed((source/path.lstrip('/')).read_text())
+ for value in refs.refs:
+  u=urlsplit(value)
+  if u.scheme or u.netloc or not u.path:continue
+  dep=(source/u.path.lstrip('/') if u.path.startswith('/') else (source/path.lstrip('/')).parent/u.path).resolve()
+  assert dep.is_relative_to((source/'assets').resolve()),(path,value)
+  assert dep.is_file(),(path,value)
+  rel=dep.relative_to(source.resolve());dest=out/rel;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(dep,dest)
+  if dep.suffix=='.html':pending.append('/'+rel.as_posix())
 assert re.search(r'<p class="home-intro__motto"><q>[^<]+</q></p>', (out/'index.html').read_text())
 assert 'Lake Tahoe, CA' in (out/'index.html').read_text()
 assert 'tab-snooker' not in (out/'index.html').read_text()

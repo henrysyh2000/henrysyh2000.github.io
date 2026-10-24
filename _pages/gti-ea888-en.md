@@ -20,12 +20,12 @@ excerpt: "Tracing how rods, rings, manufacturing and compression ratio affect me
 
 I want to understand why each part of my engine is designed and manufactured as it is, and through which mechanisms those choices affect driving feel. These notes use a **Canadian-market 2024 Golf GTI** as their reference; other engines and market versions are identified separately.
 
-## Turn the mechanism first
+## Start with the real engine
 
-This teaching reconstruction follows the factory piston illustration. Scrub the crank angle to watch four pistons move, separate piston 4's rings and pin, then open the cooling-gallery section. Exterior geometry is illustrative; the gallery is not a confirmed feature of this car's piston.
+The reference below is the engine shown on the cover of Volkswagen SSP 822223. Select an assembly to locate it, then focus the view to inspect the real shapes. Pistons, rods and the crankshaft are inside the housings; a bare slider-crank model does not represent the exterior of this engine.
 
-<iframe class="gti-anatomy" src="{{ '/assets/gti/ea888-pistons.html' | relative_url }}?embed=1&amp;lang=en" title="Interactive pistons, rods and crankshaft" loading="lazy" height="900"></iframe>
-<p class="gti-figure-link"><a href="{{ '/assets/gti/ea888-pistons.html' | relative_url }}?lang=en" target="_blank" rel="noopener">Open the animation separately ↗</a></p>
+<iframe class="gti-anatomy" src="{{ '/assets/gti/ea888-engine-map.html' | relative_url }}" title="EA888 evo4: interactive exterior assembly reference" loading="lazy" height="1050"></iframe>
+<p class="gti-figure-link"><a href="{{ '/assets/gti/ea888-engine-map.html' | relative_url }}" target="_blank" rel="noopener">Open the interactive engine reference separately ↗</a></p>
 
 {% include gti-engineering-en.md %}
 

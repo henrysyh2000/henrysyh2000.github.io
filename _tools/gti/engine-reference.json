@@ -1,0 +1,14 @@
+{
+  "tier": "Figure",
+  "purpose": "Locate real exterior assemblies before discussing hidden mechanisms.",
+  "reference": "User-supplied image, visually matched to Volkswagen SSP 822223 v1.3 cover",
+  "source_url": "https://content.datarunners.net/content/SSP/822223.pdf#page=1",
+  "image_sha256": "1db1589747239f770b8a1fd4da9d8ab1067cdb061ef0ac4fef9adca77b2a2740",
+  "image_processing": "None. Original supplied pixels retained.",
+  "assemblies": ["top cover and ignition coils", "cylinder head", "turbocharger assembly", "timing-drive end", "cylinder block / crankcase", "lower sump", "crankshaft pulley"],
+  "annotation_geometry": "Pixel-space identification regions, not measured component boundaries or 3D geometry",
+  "interaction": "Component selection and eased inspection zoom; reduced-motion preference respected",
+  "scope": "Factory exterior reference, not CAD or a verified list of Canadian 2024 GTI ancillary parts. Hidden internals are not invented on top of the image.",
+  "old_figure": "The prior bare slider-crank teaching reconstruction is no longer embedded on the engine chapter. Its stable asset URLs remain for existing links.",
+  "verification": "Anatomy solid-clearance and painter-order audits do not apply: no new modeled solids are claimed. Verify image fidelity, labels, controls, narrow layout and keyboard navigation."
+}
