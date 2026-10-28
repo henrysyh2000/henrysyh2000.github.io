@@ -1,6 +1,6 @@
 ---
 title: 'Research Notebook 04: Separating Diversity, Complexity, and Creative Quality'
-date: '2026-10-24'
+date: '2026-10-26'
 slug: research-notebook-2026-10-24-diversity-complexity-and-quality
 permalink: "/en/blog/research-notebook-2026-10-24-diversity-complexity-and-quality/"
 translation_key: research-notebook-2026-10-24-diversity-complexity-and-quality

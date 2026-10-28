@@ -1,6 +1,6 @@
 ---
 title: 'Research Notebook 05: What Does the Quality Term Measure?'
-date: '2026-10-25'
+date: '2026-10-27'
 slug: research-notebook-2026-10-25-quality-and-reference
 permalink: "/en/blog/research-notebook-2026-10-25-quality-and-reference/"
 translation_key: research-notebook-2026-10-25-quality-and-reference
