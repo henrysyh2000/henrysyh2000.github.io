@@ -85,7 +85,36 @@
   .cv-intro .page-intro { margin: 0; }
   .cv-download { display: inline-block; padding: 8px 16px; border: 1px solid var(--site-line); border-radius: 3px; font-size: 13px; text-decoration: none; }
   .cv-download:hover { border-color: var(--site-accent); }
-  .cv-document { display: block; width: 100%; min-height: 780px; height: 80vh; border: 1px solid var(--site-line); background: #fff; }
+  .cv-section { margin-top: 44px; }
+  .cv-section h2 {
+    margin: 0 0 4px;
+    padding: 0;
+    border: 0;
+    color: var(--site-secondary);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .cv-list { margin: 0; padding: 0; list-style: none; }
+  .cv-list li {
+    display: grid;
+    grid-template-columns: 116px minmax(0, 1fr);
+    gap: 24px;
+    margin: 0;
+    padding: 15px 0;
+    border-top: 1px solid var(--site-line);
+  }
+  .cv-when { padding-top: 2px; color: var(--site-secondary); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .cv-what h3 { margin: 0; color: var(--site-ink); font-size: 16px; font-weight: 500; line-height: 1.6; }
+  .cv-where { margin-left: 8px; color: var(--site-secondary); font-size: 12px; font-weight: 400; }
+  .cv-what p { margin: 4px 0 0; font-size: 14px; line-height: 1.75; }
+  .cv-what .cv-note { color: var(--site-secondary); font-size: 13px; }
+  .cv-more { margin: 14px 0 0; font-size: 13px; }
+  .cv-skills { display: grid; margin: 0; }
+  .cv-skills div { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 24px; padding: 13px 0; border-top: 1px solid var(--site-line); }
+  .cv-skills dt { color: var(--site-secondary); font-size: 12px; font-weight: 400; }
+  .cv-skills dd { margin: 0; font-size: 14px; }
 
   .life-tab { max-width: 1152px; padding: 64px 36px 0; }
   .travel-overview { max-width: 780px; margin: 0 auto 52px; }
@@ -227,7 +256,7 @@
     .archive > p, .page-intro { font-size: 15px; }
     .blog-series-nav { gap: 8px 24px; font-size: 13px; }
     .cv-intro { align-items: start; flex-direction: column; gap: 15px; }
-    .cv-document { min-height: 550px; height: 72vh; }
+    .cv-list li, .cv-skills div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
     .travel-overview { margin-bottom: 35px; }
     .travel-overview p:not(.travel-eyebrow) { font-size: 15px; }
     .travel-atlas__toolbar { flex-wrap: wrap; gap: 4px; }
