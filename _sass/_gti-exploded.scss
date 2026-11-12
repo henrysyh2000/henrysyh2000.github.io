@@ -1,0 +1,336 @@
+// GTI chapter 01: stratified exploded view of the EA888 evo4 (_includes/gti-exploded-en.html).
+// Scoped to .gti-xv; uses the site accent (blue in both modes) via --site-accent and the Anatomy light palette.
+
+.gti-xv {
+  --gti-accent: var(--site-accent, #1d428a);
+  --gti-line: var(--site-line, #dfe5ec);
+  --gti-ink: var(--site-ink, #243246);
+  --gti-muted: var(--site-secondary, #5b6572);
+  --anatomy-page: #fbfbfa; --anatomy-card: #fbfbfa; --anatomy-paper: #fbfbfa;
+  --anatomy-face: #ffffff; --anatomy-top: #ffffff;
+  --anatomy-shade-0: #dcdcd9; --anatomy-shade-1: #e5e5e2; --anatomy-shade-2: #ededea; --anatomy-shade-3: #f4f4f1;
+  --anatomy-lit-top: #ffffff; --anatomy-lit-shade: #eeeeeb;
+  --anatomy-hi: #26262a; --anatomy-mid: #8a8a8f; --anatomy-lo: #b4b4b8; --anatomy-faint: #d4d4d6; --anatomy-lit: #000000;
+  --anatomy-halo: #8a8a80; --anatomy-halo-opacity: .26; --anatomy-dot: #3a3a3e;
+  --anatomy-weight: .6px;
+  --anatomy-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  container-type: inline-size;
+  margin: 30px 0 36px;
+  color: var(--gti-ink);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+// Anatomy kit drawing rules (kit/iso.css), scoped to the figure.
+.gti-xv .iso-fill{fill:var(--anatomy-paper);stroke:none}
+.gti-xv .iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.gti-xv .iso-shade,.gti-xv .iso-top{stroke:none}
+.gti-xv .iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.gti-xv .iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.gti-xv .iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.gti-xv .iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.gti-xv .iso-top{fill:var(--anatomy-top)}
+.gti-xv .iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.gti-xv .iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.gti-xv .iso-solid[data-seamless]>.iso-shade,.gti-xv .iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.gti-xv .iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.gti-xv .iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.gti-xv .iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.gti-xv .iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.gti-xv .iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.gti-xv .iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.gti-xv .iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.gti-xv .iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.gti-xv .iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.gti-xv .iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.gti-xv .iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.gti-xv .iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.gti-xv .iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.gti-xv .iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.gti-xv .iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.gti-xv .iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.gti-xv .iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.gti-xv .iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.gti-xv .iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.gti-xv .iso-line[data-dashed]{stroke-dasharray:3 3}
+.gti-xv .iso-line[data-flow]{stroke-dasharray:2 6}
+.gti-xv .iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.gti-xv .iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.gti-xv .iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.gti-xv .iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.gti-xv .iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.gti-xv .iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.gti-xv .iso-dots[data-tone="hi"] circle{opacity:.85}
+.gti-xv .iso-dots[data-tone="mid"] circle{opacity:.45}
+.gti-xv .iso-dots[data-tone="lo"] circle{opacity:.22}
+.gti-xv .iso-dots[data-tone="faint"] circle{opacity:.12}
+.gti-xv .iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.gti-xv .iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.gti-xv .iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.gti-xv .iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.gti-xv .iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.gti-xv .iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+
+.gti-xv .tb-body { fill: var(--anatomy-shade-2); stroke: none; }
+.gti-xv .tb-shine { fill: var(--anatomy-top); stroke: none; }
+.gti-xv .tb-shade { fill: var(--anatomy-shade-0); stroke: none; }
+// the turbine housing's face: a plain light cast face; its inboard edge in shadow
+// shaded cast surfaces (compressor scroll and boss, outlet drum, turbine bell, crankcase bulge), patch by patch in twelve
+// steps from the shadowed flank to the lit crest (geometry.mjs: sweepPieces); each patch is stroked in its own tone so no
+// seams show
+.gti-xv .gti-xv-v { stroke-width: .6; stroke-linejoin: round; }
+.gti-xv .gti-xv-v[data-v="0"] { fill: #2a2e32; stroke: #2a2e32; }
+.gti-xv .gti-xv-v[data-v="1"] { fill: #363b40; stroke: #363b40; }
+.gti-xv .gti-xv-v[data-v="2"] { fill: #43484e; stroke: #43484e; }
+.gti-xv .gti-xv-v[data-v="3"] { fill: #51575d; stroke: #51575d; }
+.gti-xv .gti-xv-v[data-v="4"] { fill: #60666c; stroke: #60666c; }
+.gti-xv .gti-xv-v[data-v="5"] { fill: #70767c; stroke: #70767c; }
+.gti-xv .gti-xv-v[data-v="6"] { fill: #81878c; stroke: #81878c; }
+.gti-xv .gti-xv-v[data-v="7"] { fill: #93989d; stroke: #93989d; }
+.gti-xv .gti-xv-v[data-v="8"] { fill: #a5aaae; stroke: #a5aaae; }
+.gti-xv .gti-xv-v[data-v="9"] { fill: #b8bcbf; stroke: #b8bcbf; }
+.gti-xv .gti-xv-v[data-v="10"] { fill: #cfd2d5; stroke: #cfd2d5; }
+.gti-xv .gti-xv-v[data-v="11"] { fill: #eceef0; stroke: #eceef0; }
+// the same, in the iron tones of the crankcase wall (its plain wall is step 3)
+.gti-xv .gti-xv-vi { stroke-width: .6; stroke-linejoin: round; }
+.gti-xv .gti-xv-vi[data-v="0"] { fill: #2c2e32; stroke: #2c2e32; }
+.gti-xv .gti-xv-vi[data-v="1"] { fill: #34363a; stroke: #34363a; }
+.gti-xv .gti-xv-vi[data-v="2"] { fill: #3f4145; stroke: #3f4145; }
+.gti-xv .gti-xv-vi[data-v="3"] { fill: #4d4f53; stroke: #4d4f53; }
+.gti-xv .gti-xv-vi[data-v="4"] { fill: #56595d; stroke: #56595d; }
+.gti-xv .gti-xv-vi[data-v="5"] { fill: #606367; stroke: #606367; }
+.gti-xv .gti-xv-vi[data-v="6"] { fill: #6b6e72; stroke: #6b6e72; }
+.gti-xv .gti-xv-vi[data-v="7"] { fill: #777a7e; stroke: #777a7e; }
+.gti-xv .gti-xv-vi[data-v="8"] { fill: #83868a; stroke: #83868a; }
+.gti-xv .gti-xv-vi[data-v="9"] { fill: #909397; stroke: #909397; }
+.gti-xv .gti-xv-vi[data-v="10"] { fill: #9da0a4; stroke: #9da0a4; }
+.gti-xv .gti-xv-vi[data-v="11"] { fill: #abaeb2; stroke: #abaeb2; }
+.gti-xv .gti-xv-face { fill: #aeb3b8; stroke: none; }
+// the turbine housing's dish, shaded as a bowl (gradient defined in the figure's <defs>)
+// piston rings are rings: their bore stays open (the lathe adds the hole as a second contour)
+.gti-xv .gti-xv-layer[data-layer^="ring"] path { fill-rule: evenodd; }
+// pistons and rods: ring grooves, recessed faces (skirt cut-back at the pin bosses, the rod's I-beam web), the crown's
+// bowl with its lit far wall, and the valve reliefs
+// the cylinder head's valvetrain bay: its lit inner walls and its floor
+.gti-xv .gti-xv-baywall { fill: #8d939a; stroke: none; }
+.gti-xv .gti-xv-bayfloor { fill: #6f767d; stroke: none; }
+.gti-xv .gti-xv-socket { fill: #3f454b; stroke: none; }
+// the flywheel's recessed annulus between its rim and hub
+.gti-xv .gti-xv-annulus { fill: #b9bec3; fill-rule: evenodd; stroke: none; }
+// inside a cylinder bore on the block deck: from this elevation only the far wall shows, lit near the rim and darkening
+// with depth (gradient in the figure's <defs>)
+.gti-xv .gti-xv-borewall { fill: #6c7279; fill: url(#gti-xv-borewall-g); stroke: none; }
+.gti-xv .gti-xv-groove { fill: #7d838a; stroke: none; }
+.gti-xv .gti-xv-recess { fill: #a9afb5; stroke: none; }
+.gti-xv .gti-xv-dish { fill: #b7bcc1; stroke: none; }
+.gti-xv .gti-xv-dish-lit { fill: #dfe2e5; stroke: none; }
+.gti-xv .gti-xv-relief { fill: #d2d6da; stroke: none; }
+.gti-xv .gti-xv-bowl { fill: #a3a9ae; fill: url(#gti-xv-bowl-g); stroke: none; }
+.gti-xv .gti-xv-shadow { fill: #6c7279; stroke: none; }
+// smooth cast faces lit from the upper left (turbine housing)
+.gti-xv .gti-xv-dome { fill: #bfc4c9; fill: url(#gti-xv-dome-g); stroke: none; }
+.gti-xv .tb-ring { fill: none; stroke: var(--anatomy-lo); stroke-width: .45; stroke-linecap: butt; stroke-linejoin: round; }
+.gti-xv .tb-ring[data-tone="mid"] { stroke: var(--anatomy-mid); }
+
+.gti-xv-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px 22px; align-items: start; }
+.gti-xv-index { grid-column: 1 / -1; }
+.gti-xv-index ol { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.gti-xv-index li { margin: 0; }
+.gti-xv-index button {
+  display: inline-flex; gap: 6px; align-items: baseline; padding: 4px 9px;
+  border: 1px solid var(--gti-line); border-radius: 999px; background: #fff; color: var(--gti-muted);
+  font: inherit; font-size: 12.5px; line-height: 1.4; cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease;
+}
+.gti-xv-index button:hover { border-color: var(--gti-accent); color: var(--gti-ink); }
+.gti-xv-index button[aria-pressed="true"] { border-color: var(--gti-accent); background: color-mix(in srgb, var(--gti-accent) 9%, #fff); color: var(--gti-ink); }
+.gti-xv-n { font-family: var(--anatomy-mono); font-size: 11px; font-variant-numeric: tabular-nums; color: var(--gti-accent); }
+.gti-xv-eyebrow { margin: 0 0 8px; color: var(--gti-muted); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; }
+
+.gti-xv-plate { position: relative; padding: 38px 14px 14px; background: var(--anatomy-card); box-shadow: 0 0 0 1px var(--gti-line); }
+.gti-xv-corners span { position: absolute; top: 14px; color: var(--gti-muted); font-family: var(--anatomy-mono); font-size: 10.5px; letter-spacing: .06em; line-height: 1; }
+.gti-xv-corners [data-corner="fig"] { left: 16px; color: var(--gti-ink); }
+.gti-xv-corners [data-corner="title"] { right: 16px; text-transform: uppercase; letter-spacing: .1em; }
+.gti-xv-stage { outline: none; border-radius: 2px; touch-action: pan-y; cursor: grab; }
+.gti-xv-stage:active { cursor: grabbing; }
+.gti-xv[data-turning] .gti-xv-stage { cursor: progress; }
+.gti-xv-stage:focus-visible { box-shadow: 0 0 0 2px var(--gti-accent); }
+.gti-xv-svg { display: block; width: 100%; height: auto; max-width: 560px; margin: 0 auto; overflow: visible; }
+.gti-xv-svg path { vector-effect: non-scaling-stroke; }
+
+.gti-xv-layer { cursor: pointer; transition: opacity 260ms ease; }
+.gti-xv-layer .iso-edge { transition: stroke 160ms ease; }
+.gti-xv-layer:hover .iso-edge { stroke: var(--gti-accent); }
+.gti-xv[data-selected] .gti-xv-layer:not([data-active]) { opacity: .26; }
+.gti-xv[data-selected] .gti-xv-layer:not([data-active]):hover { opacity: .55; }
+.gti-xv-layer[data-active] .iso-edge { stroke: var(--gti-accent); }
+// Materials, toned after the SSP 822223 cover picture: grey aluminium, charcoal cast iron, silver steel, black plastic.
+// Declared on any element so a part inside a layer (vacuum pump, filler cap) can carry its own material.
+.gti-xv [data-mat="alu"] {
+  --anatomy-paper: #cdd1d6; --anatomy-face: #d9dce0; --anatomy-top: #dde0e4;
+  --anatomy-shade-0: #9ea5ad; --anatomy-shade-1: #adb3ba; --anatomy-shade-2: #bbc0c6; --anatomy-shade-3: #c6cad0;
+  --anatomy-hi: #22262b; --anatomy-mid: #6d737b; --anatomy-lo: #9aa0a7; --anatomy-faint: #bcc1c7; --anatomy-dot: #22262b;
+}
+// cast iron, lit as in the picture: dark on the faces turned from the light, a light grey on the faces toward it
+.gti-xv [data-mat="iron"] {
+  --anatomy-paper: #7c8187; --anatomy-face: #8a8f95; --anatomy-top: #8c9096;
+  --anatomy-shade-0: #4d4f53; --anatomy-shade-1: #595b5f; --anatomy-shade-2: #6a6d71; --anatomy-shade-3: #777a7e;
+  --anatomy-hi: #101215; --anatomy-mid: #30343a; --anatomy-lo: #454a50; --anatomy-faint: #575c62; --anatomy-dot: #101215;
+}
+// dark parts on the iron block: the crankshaft sealing flange
+.gti-xv [data-mat="dark"] {
+  --anatomy-paper: #6c7178; --anatomy-face: #787d84; --anatomy-top: #81868d;
+  --anatomy-shade-0: #4b4d51; --anatomy-shade-1: #56585c; --anatomy-shade-2: #525457; --anatomy-shade-3: #5d5f62;
+  --anatomy-hi: #101215; --anatomy-mid: #30343a; --anatomy-lo: #454a50; --anatomy-faint: #575c62; --anatomy-dot: #101215;
+}
+.gti-xv [data-mat="iron"] .gti-xv-bore { fill: #34383d; }
+.gti-xv [data-mat="steel"] {
+  --anatomy-paper: #d7dce1; --anatomy-face: #e4e8ec; --anatomy-top: #eaedf0;
+  --anatomy-shade-0: #959ea8; --anatomy-shade-1: #adb5bd; --anatomy-shade-2: #c3c9cf; --anatomy-shade-3: #d4d9de;
+  --anatomy-hi: #1f2328; --anatomy-mid: #5f666e; --anatomy-lo: #8d949c; --anatomy-faint: #b3b9bf; --anatomy-dot: #1f2328;
+}
+.gti-xv [data-mat="cast"] {
+  --anatomy-paper: #b3b9c0; --anatomy-face: #c7ccd2; --anatomy-top: #dde1e5;
+  --anatomy-shade-0: #737a83; --anatomy-shade-1: #8a9199; --anatomy-shade-2: #a1a8af; --anatomy-shade-3: #b6bcc2;
+  --anatomy-hi: #1a1d21; --anatomy-mid: #4f555c; --anatomy-lo: #6f757c; --anatomy-faint: #8f959c; --anatomy-dot: #1a1d21;
+}
+// cast aluminium of the cylinder head: a step darker than the other castings, as the head sits in shadow in the picture
+.gti-xv [data-mat="hcast"] {
+  --anatomy-paper: #959ba1; --anatomy-face: #a2a8ad; --anatomy-top: #b4b9bd;
+  --anatomy-shade-0: #6f767d; --anatomy-shade-1: #7a8188; --anatomy-shade-2: #81878d; --anatomy-shade-3: #8e9499;
+  --anatomy-hi: #1a1d21; --anatomy-mid: #4f555c; --anatomy-lo: #6f757c; --anatomy-faint: #8f959c; --anatomy-dot: #1a1d21;
+}
+// cast aluminium of the compressor housing: a bright silver, the lightest metal in the picture
+.gti-xv [data-mat="ccast"] {
+  --anatomy-paper: #aab0b6; --anatomy-face: #bcc1c6; --anatomy-top: #d0d4d8;
+  --anatomy-shade-0: #7a8188; --anatomy-shade-1: #8b9299; --anatomy-shade-2: #9ca3a9; --anatomy-shade-3: #adb3b9;
+  --anatomy-hi: #15181c; --anatomy-mid: #4f555c; --anatomy-lo: #6f757c; --anatomy-faint: #8f959c; --anatomy-dot: #15181c;
+}
+// cast steel of the turbine housing: a light silver bell in the picture, a little duller than the compressor housing
+.gti-xv [data-mat="tcast"] {
+  --anatomy-paper: #aab0b6; --anatomy-face: #b8bdc3; --anatomy-top: #cfd3d7;
+  --anatomy-shade-0: #7e858c; --anatomy-shade-1: #8f969d; --anatomy-shade-2: #a1a7ad; --anatomy-shade-3: #b2b8bd;
+  --anatomy-hi: #15181c; --anatomy-mid: #3e444b; --anatomy-lo: #555b62; --anatomy-faint: #6f757c; --anatomy-dot: #15181c;
+}
+.gti-xv [data-mat="white"] {
+  --anatomy-paper: #eef0f2; --anatomy-face: #f7f8f9; --anatomy-top: #fbfbfc;
+  --anatomy-shade-0: #c9cdd2; --anatomy-shade-1: #d6d9dd; --anatomy-shade-2: #e1e4e7; --anatomy-shade-3: #e9ebee;
+  --anatomy-hi: #22262b; --anatomy-mid: #6d737b; --anatomy-lo: #9aa0a7; --anatomy-faint: #bcc1c7; --anatomy-dot: #22262b;
+}
+.gti-xv [data-mat="plastic"] {
+  --anatomy-paper: #484c52; --anatomy-face: #52575d; --anatomy-top: #5a5f65;
+  --anatomy-shade-0: #2e3135; --anatomy-shade-1: #363a3e; --anatomy-shade-2: #3e4247; --anatomy-shade-3: #464a50;
+  --anatomy-hi: #07080a; --anatomy-mid: #202327; --anatomy-lo: #2b2e33; --anatomy-faint: #35393e; --anatomy-dot: #c9cdd2;
+}
+.gti-xv [data-mat="plastic"] .gti-xv-bore { fill: #26292d; }
+.gti-xv [data-mat="black"] {
+  --anatomy-paper: #2c2f33; --anatomy-face: #34383d; --anatomy-top: #3c4045;
+  --anatomy-shade-0: #1d2023; --anatomy-shade-1: #232629; --anatomy-shade-2: #282b2f; --anatomy-shade-3: #2e3135;
+  --anatomy-hi: #050607; --anatomy-mid: #15171a; --anatomy-lo: #1d2023; --anatomy-faint: #26292d; --anatomy-dot: #c9cdd2;
+}
+.gti-xv [data-mat="yellow"] {
+  --anatomy-paper: #d8b23a; --anatomy-face: #e3c04f; --anatomy-top: #e8c75a;
+  --anatomy-shade-0: #ad8a1f; --anatomy-shade-1: #ba9628; --anatomy-shade-2: #c6a231; --anatomy-shade-3: #d0ac38;
+  --anatomy-hi: #2a2208; --anatomy-mid: #6b5714; --anatomy-lo: #8a7119;
+}
+.gti-xv-bore { fill: var(--anatomy-shade-0); stroke: none; }
+.gti-xv .gti-xv-hole { fill: #1c1f23; stroke: none; }
+.gti-xv .gti-xv-pocket { fill: var(--anatomy-shade-1); stroke: none; }
+.gti-xv .gti-xv-deep { fill: #2f3338; fill: url(#gti-xv-deep-g); stroke: none; }
+.gti-xv .gti-xv-mid { fill: #8e949b; stroke: none; }
+.gti-xv .gti-xv-slot { fill: #555b62; stroke: none; }
+.gti-xv .gti-xv-light { fill: var(--anatomy-top); stroke: none; }
+.gti-xv .gti-xv-throat { fill: #7a8087; stroke: none; }
+.gti-xv .gti-xv-inset { fill: #aab0b6; stroke: none; }
+// pockets between the webs of the gearbox flange: a dark grey, as measured on the picture (not black)
+.gti-xv .gti-xv-pocket { fill: #4b5055; stroke: none; }
+.gti-xv .gti-xv-pocket-deep { fill: #353a3f; stroke: none; }
+// the compressor inlet seen into its bore: the wall in shadow on one side, lit on the other (as measured on the picture)
+.gti-xv .gti-xv-bore-dark { fill: #3c4146; stroke: none; }
+.gti-xv .gti-xv-bore-lit { fill: #bfc3c7; stroke: none; }
+// the shadowed engine seen through the gaps of the turbocharger cluster
+.gti-xv .gti-xv-gap { fill: #2c2f33; stroke: none; }
+
+.gti-xv-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 0 0 12px; padding-bottom: 12px; border-bottom: 1px solid var(--gti-line); font-size: 12.5px; }
+.gti-xv-controls button, .gti-xv-start, .gti-xv-step button {
+  padding: 5px 12px; border: 1px solid var(--gti-line); border-radius: 3px; background: #fff; color: var(--gti-ink);
+  font: inherit; font-size: 12.5px; cursor: pointer; transition: border-color 160ms ease;
+}
+.gti-xv-controls button:hover, .gti-xv-start:hover, .gti-xv-step button:hover:not(:disabled) { border-color: var(--gti-accent); }
+.gti-xv-controls label { display: inline-flex; align-items: center; gap: 8px; color: var(--gti-muted); }
+.gti-xv-controls input[type="range"] { width: 130px; accent-color: var(--gti-accent); }
+.gti-xv-controls [hidden] { display: none; }
+.gti-xv-readout { margin-left: auto; color: var(--gti-muted); font-family: var(--anatomy-mono); font-size: 11px; font-variant-numeric: tabular-nums; }
+.gti-xv-hint { margin: 8px 0 0; color: var(--gti-muted); font-family: var(--anatomy-mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; }
+
+.gti-xv-panel { padding: 18px 18px 16px; background: #fff; box-shadow: 0 0 0 1px var(--gti-line); }
+.gti-xv-empty { margin: 0 0 12px; color: var(--gti-muted); }
+.gti-xv-head h3 { margin: 0 0 6px; font-size: 21px; line-height: 1.35; font-weight: 500; }
+.gti-xv-head { position: relative; }
+.gti-xv-head .gti-xv-eyebrow { margin-bottom: 4px; color: var(--gti-accent); font-family: var(--anatomy-mono); letter-spacing: .04em; }
+.gti-xv-close { position: absolute; top: -6px; right: -6px; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--gti-muted); font: 400 20px/30px system-ui, sans-serif; cursor: pointer; }
+.gti-xv-close:hover { background: color-mix(in srgb, var(--gti-accent) 10%, #fff); color: var(--gti-ink); }
+.gti-xv-role { margin: 0 0 14px; color: var(--gti-muted); }
+.gti-xv-specs { display: table; width: 100%; margin: 0 0 14px; border-collapse: collapse; font-size: 13px; }
+.gti-xv-specs th, .gti-xv-specs td { padding: 8px 0; border: 0; border-top: 1px solid var(--gti-line); vertical-align: top; text-align: left; }
+.gti-xv-specs th { width: 38%; padding-right: 12px; color: var(--gti-muted); font-weight: 400; }
+.gti-xv-value { display: block; color: var(--gti-ink); font-variant-numeric: tabular-nums; }
+.gti-xv-meta { display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline; margin-top: 3px; }
+.gti-xv-meta cite { color: var(--gti-muted); font-family: var(--anatomy-mono); font-size: 10.5px; font-style: normal; }
+.gti-xv-kind { padding: 0 6px; border: 1px solid currentColor; border-radius: 999px; font-size: 10.5px; line-height: 1.5; }
+.gti-xv-kind[data-kind="oem"] { color: #2f6b4f; }
+.gti-xv-kind[data-kind="derived"] { color: #1d428a; }
+.gti-xv-kind[data-kind="unknown"] { color: #4a4f57; border-style: dashed; }
+.gti-xv-kind[data-kind="drawing"] { color: #6b6b70; border-style: dotted; }
+.gti-xv-kind[data-kind="measured"] { color: #1d428a; border-style: dashed; }
+.gti-xv-notes p { margin: 0 0 10px; font-size: 13.5px; line-height: 1.75; }
+.gti-xv-step { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+.gti-xv-step button { display: grid; gap: 1px; text-align: left; }
+.gti-xv-step button:last-child { text-align: right; }
+.gti-xv-step button:disabled { opacity: .4; cursor: default; }
+.gti-xv-step small { color: var(--gti-muted); font-size: 11.5px; }
+.gti-xv-caption { margin-top: 12px; color: var(--gti-muted); font-size: 13px; line-height: 1.7; }
+
+// Phone and narrow columns: the panel rides along the bottom of the screen while the figure scrolls.
+@container (max-width: 759px) {
+  .gti-xv-index ol { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .gti-xv-index button { white-space: nowrap; }
+  .gti-xv-head h3 { padding-right: 26px; font-size: 19px; }
+  .gti-xv-panel { position: sticky; bottom: 0; z-index: 2; max-height: 46vh; overflow: auto; box-shadow: 0 -1px 0 var(--gti-line), 0 -10px 24px -18px rgba(36, 50, 70, .45); }
+  .gti-xv-specs th { width: 34%; }
+}
+// Two columns: figure beside a sticky panel.
+@container (min-width: 760px) {
+  .gti-xv-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); }
+  .gti-xv-panel { position: sticky; top: 76px; max-height: calc(100vh - 96px); overflow: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gti-xv-layer, .gti-xv-layer .iso-edge, .gti-xv-index button { transition: none; }
+}
+
+// The article theme styles h3, p, table and figcaption with higher specificity; restate them inside the figure.
+.gti-xv .gti-xv-head h3 { margin: 0 0 6px; }
+.gti-xv p.gti-xv-eyebrow { font-size: 11.5px; line-height: 1.5; }
+.gti-xv p.gti-xv-role, .gti-xv p.gti-xv-empty { font-size: 14px; line-height: 1.65; }
+.gti-xv .gti-xv-notes p { font-size: 13.5px; line-height: 1.75; }
+.gti-xv table.gti-xv-specs { font-family: inherit; font-size: 13px; }
+.gti-xv figcaption.gti-xv-caption, .gti-xv .gti-xv-caption { font-family: inherit; font-size: 13px; line-height: 1.7; }
+.gti-xv p.gti-xv-hint { font-size: 10.5px; }
+
+// GTI section epigraph above the "GTI Mark 8" title (_includes/gti-notebook.html).
+.gti-epigraph { max-width: 46ch; margin: 0 0 30px; padding: 0; }
+.gti-epigraph blockquote { margin: 0; padding: 0 0 0 16px; border: 0; border-inline-start: 2px solid var(--site-accent, #1d428a); color: var(--site-ink, #243246); font: italic 400 17px/1.75 Charter, "Iowan Old Style", Georgia, serif; }
+.gti-epigraph blockquote p { margin: 0; font: inherit; }
+.gti-epigraph figcaption { margin: 8px 0 0 18px; color: var(--site-secondary, #5b6572); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.gti-epigraph figcaption::before { content: "— "; }
+
+// Official reference image near the top of the chapter.
+.gti-reference { max-width: 360px; margin: 26px auto 30px; text-align: center; }
+.gti-reference img { display: block; width: 100%; height: auto; margin: 0 auto; }
+.gti-reference figcaption { margin-top: 10px; color: var(--site-secondary, #5b6572); font-size: 12.5px; line-height: 1.6; text-align: left; }
+
+// Parts that sit inside another part (coil bodies in the plug wells) are hidden once the engine is assembled.
+.gti-xv[data-assembled] .gti-xv-sunk, .gti-xv-static-assembled .gti-xv-sunk { display: none; }
+.gti-xv .gti-xv-assembled-only { display: none; }
+.gti-xv[data-assembled] .gti-xv-assembled-only, .gti-xv-static-assembled .gti-xv-assembled-only { display: inline; }
+.gti-xv[data-assembled] .gti-xv-apart-only, .gti-xv-static-assembled .gti-xv-apart-only { display: none; }
