@@ -1,4 +1,5 @@
 ---
+published: false
 title: 'Research Notebook 06: What Question Does a Score Answer?'
 date: '2026-10-26'
 slug: research-notebook-2026-10-26-evaluation-and-comparison

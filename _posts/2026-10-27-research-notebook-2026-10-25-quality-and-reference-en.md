@@ -1,4 +1,5 @@
 ---
+published: false
 title: 'Research Notebook 05: What Does the Quality Term Measure?'
 date: '2026-10-27'
 slug: research-notebook-2026-10-25-quality-and-reference

@@ -1,4 +1,5 @@
 ---
+published: false
 title: 'Research Notebook 04: Separating Diversity, Complexity, and Creative Quality'
 date: '2026-10-26'
 slug: research-notebook-2026-10-24-diversity-complexity-and-quality

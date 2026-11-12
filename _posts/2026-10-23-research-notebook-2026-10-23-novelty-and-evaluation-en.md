@@ -1,4 +1,5 @@
 ---
+published: false
 title: 'Research Notebook 03: From Output Differences to Conceptual Novelty'
 date: '2026-10-23'
 slug: research-notebook-2026-10-23-novelty-and-evaluation

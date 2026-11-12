@@ -1,0 +1,13 @@
+# BGM for a notebook entry, keyed by slug. Rendered by _includes/notebook-bgm.html as a
+# click-to-load player at the very top of the article, above the language toggle and the title.
+# provider: youtube — id is the video id of an official upload (check it with YouTube's oEmbed before adding).
+research-notebook-2026-11-11-why-this-notebook:
+  title: "Another Day in Paradise"
+  artist: "Phil Collins"
+  provider: youtube
+  id: "Qt2mbGP6vFI"
+research-notebook-2026-10-21-analogy-diversity:
+  title: "Down Under"
+  artist: "Men at Work"
+  provider: youtube
+  id: "XfR9iY5y94s"

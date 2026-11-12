@@ -1,0 +1,91 @@
+/* BGM player at the top of a notebook entry, above the language toggle and the title. Light theme, site tokens with fallbacks. */
+.nb-bgm {
+  --bgm-ink: var(--site-ink, #243246);
+  --bgm-muted: var(--site-secondary, #5b6572);
+  --bgm-line: var(--site-line, #dfe5ec);
+  --bgm-accent: var(--site-accent, #1d428a);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0 0.9rem;
+  margin: 0 0 1.6rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--bgm-line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--bgm-ink);
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", sans-serif;
+}
+
+.nb-bgm .nb-bgm__play {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bgm-accent);
+  cursor: pointer;
+}
+.nb-bgm .nb-bgm__play[hidden] { display: none; }
+.nb-bgm .nb-bgm__play:focus-visible { outline: 2px solid var(--bgm-accent); outline-offset: 3px; }
+
+/* play triangle; becomes a stop square while the player is open */
+.nb-bgm .nb-bgm__icon {
+  width: 0;
+  height: 0;
+  margin-left: 0.16rem;
+  border-style: solid;
+  border-width: 0.42rem 0 0.42rem 0.7rem;
+  border-color: transparent transparent transparent #fff;
+}
+.nb-bgm.is-open .nb-bgm__icon {
+  width: 0.72rem;
+  height: 0.72rem;
+  margin: 0;
+  border: 0;
+  border-radius: 1px;
+  background: #fff;
+}
+
+.nb-bgm .nb-bgm__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.55rem;
+  min-width: 0;
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+.nb-bgm .nb-bgm__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: var(--bgm-muted);
+}
+.nb-bgm .nb-bgm__title { font-weight: 650; color: var(--bgm-ink); }
+.nb-bgm .nb-bgm__artist { color: var(--bgm-muted); }
+
+.nb-bgm .nb-bgm__link {
+  font-size: 0.76rem;
+  color: var(--bgm-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.nb-bgm .nb-bgm__frame {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 28rem;
+  margin-top: 0.8rem;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0b0f14;
+}
+.nb-bgm .nb-bgm__frame[hidden] { display: none; }
+.nb-bgm .nb-bgm__frame iframe { display: block; width: 100%; height: 100%; border: 0; }

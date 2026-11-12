@@ -21,26 +21,44 @@ categories:
 series: research-notebook
 ---
 
-This entry reflects on an exploratory direction that has not yet produced a reliable way to improve analogy generation. I wanted to understand whether changes in a language model's internal states could help it produce more varied analogies while preserving relationships. This public version retains the questions, approach, and reflections; measurements, parameter settings, configurations, and full analyses remain in my private notes.
+First, why I want to study diversity in analogy. It started with conversations with my advisor, who said that making analogies is a core part of human cognition and recommended a book, *Surfaces and Essences: Analogy as the Fuel and Fire of Thinking* by Hofstadter and Sander. My advisor also pointed me to Peter Turney's [Domain and Function](https://arxiv.org/abs/1309.4035).
 
-## What I was trying to understand
+Turney separates two kinds of similarity. Similarity of topic and context is domain; similarity of role and relation is function. Take `carpenter : wood :: mason : stone`. Carpenter and wood, mason and stone: each pair belongs together in its own context, and that is domain. Carpenter matches mason and wood matches stone by the role they play, and that is function.
 
-An analogy should offer a new perspective while preserving important relationships in the original sentence. Different words do not necessarily imply a different context, and a different context does not guarantee that the relationship survives. I wanted to understand whether internal-state changes could help explain these distinctions and provide a basis for later interventions.
+My advisor's idea was that our core question sits right here: when a model makes an analogy, how does it settle on domain and function? We have been exploring that question ever since. Following that thread, we took a look at techniques from mechanistic interpretability, from sparse autoencoders at the start to the many kinds of lenses now, and even self-explanation, where the model explains itself. In the end the question boils down to one thing: I still want to look at the model's internal trajectory.
 
-## What this direction has not established
+The concrete task: give the model a sentence and ask for another sentence with a similar structure in a different setting. The model's habit is to keep circling the same few domains. Push it to be diverse and the relation in the original sentence tends to get lost. I want to know where diversity comes from inside the model.
 
-I observed associations worth investigating and explored connections between internal representations and concepts. These explorations did not establish a causal mechanism or a reliable method for improving analogy generation. For now, I treat this as an unsuccessful exploratory direction rather than an established mechanistic explanation.
+## Hypothesis whiteboard
 
-Lexical variation, contextual variation, and relational preservation need separate judgments. Geometric differences cannot directly replace quality evaluation, and local observations do not explain how the complete mechanism works.
+1. **Trajectory amplitude: when the model writes an analogy, its hidden-state trajectory swings wider than when it writes a literal restatement.** ← tested today
+2. Onset distance: the farther a sentence's opening internal state is from those of the earlier sentences, the newer its wording.
+3. Neuron labelling: picking from a human label pool first, then letting the model propose its own labels for what is left, can give most neurons a concept label.
 
-## Later reading: Turney's domain and function
+The first one came from a figure. Take one model and one story, link the hidden states of every layer into a trajectory as each token is generated, and project it onto a plane. When the model writes an analogy, the trajectory swings wider than when it writes a literal restatement. I spent this evening looking at that figure. But it is one story, so the first thing is to check that it is not a coincidence.
 
-I added this reading on October 23, 2026; it is separate from the experimental progress recorded on the original date. In [Domain and Function], Peter Turney distinguishes similarity in topic and context from similarity in roles and relational usage.
+The other two were already under way. They go on the whiteboard now, and I will take them one at a time.
 
-For `carpenter : wood :: mason : stone`, each artisan pairs with a material in its own context, while artisan and material are the corresponding roles across pairs. Domain helps assess contextual grouping; function helps assess role correspondence. They work together, without implying that greater distance between domains is always better. [The paper's discussion of pairings]
+## Materials
 
-For my work, this suggests checking whether a relationship survives before asking how its context changes. It remains a way to organize the question, not evidence that language models contain independent representation subspaces for domain and function.
+The pilot experiments mainly use two models: LLaMA 3.1 8B Instruct and Gemma 2 9B Instruct. The stories come from three analogy datasets. This section appears only in this first entry.
 
-## What I take from it
+## Experiment
 
-I need to distinguish looking different from forming a valid analogy, and observation from causal explanation. An unsuccessful exploration can still clarify what evidence I need to test my intuitions next.
+Forty stories on LLaMA. Each story has one analogy sentence and one literal restatement, and I compare the mean step size of the two trajectories as a pair. This is observation only; the model is not touched.
+
+## Result
+
+In 39 of the 40 stories the analogy has the larger step, about 9% larger on average. What the figure showed was not a coincidence.
+
+<div class="nb-chart" data-nb-chart="step-amplitude">Interactive chart: trajectory step size for the first analogy sentence and the literal restatement.</div>
+
+## Insight
+
+This only shows that the two kinds of generation look different inside the model. Where I am stuck: does the amplitude also affect the quality and the diversity of the output? How do I connect what I see in the figure to the output causally? Step size is not a quality score, and it is not a diversity score.
+
+Thinking further, amplitude may not be what matters. The trajectory may simply have drifted toward other concepts. Whether diversity depends on how far the state travels or on where it drifts, the figure cannot tell. I have to intervene on the hidden states directly. Those two go on the whiteboard in the next entry.
+
+The chart shows real values. Parameter settings and raw examples stay in my private notes.
+
+btw, today's song is "Down Under" by Men at Work

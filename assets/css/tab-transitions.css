@@ -1,0 +1,35 @@
+/* Sliding between header tabs, like swiping between pages on a phone.
+   Home / Publications / Notebook / CV are separate pages and slide through cross-document
+   view transitions; the in-page Life tabs use the same animation through
+   document.startViewTransition (see assets/js/tab-transitions.js). Browsers without view
+   transitions simply switch as before. */
+@view-transition { navigation: auto; }
+
+:root { --tab-slide: 440ms cubic-bezier(0.32, 0.72, 0, 1); }
+
+.initial-content { view-transition-name: tab-page; }
+.site-masthead { view-transition-name: site-header; }
+
+/* Nothing moves unless a direction is set: no cross-fade of the page or the header. */
+::view-transition-old(root),
+::view-transition-new(root),
+::view-transition-old(tab-page),
+::view-transition-new(tab-page),
+::view-transition-new(site-header) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(site-header) { display: none; }
+::view-transition-group(site-header) { z-index: 1; animation: none; }
+
+/* forward: to a tab further right. back: to a tab further left. */
+html[data-tab-direction="forward"]::view-transition-old(tab-page) { animation: tab-out-left var(--tab-slide) both; }
+html[data-tab-direction="forward"]::view-transition-new(tab-page) { animation: tab-in-right var(--tab-slide) both; }
+html[data-tab-direction="back"]::view-transition-old(tab-page) { animation: tab-out-right var(--tab-slide) both; }
+html[data-tab-direction="back"]::view-transition-new(tab-page) { animation: tab-in-left var(--tab-slide) both; }
+
+@keyframes tab-out-left { to { transform: translateX(-100vw); } }
+@keyframes tab-in-right { from { transform: translateX(100vw); } }
+@keyframes tab-out-right { to { transform: translateX(100vw); } }
+@keyframes tab-in-left { from { transform: translateX(-100vw); } }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}

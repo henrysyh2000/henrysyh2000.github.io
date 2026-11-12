@@ -1,0 +1,20 @@
+{% comment %}EN / 中 toggle above the article title (under the BGM player when that sits at the top), left-aligned. English is the default edition; the toggle appears only when the other edition of this entry exists.{% endcomment %}
+{% assign other_edition = nil %}
+{% if page.translation_key %}
+  {% if page.lang == 'zh-CN' %}
+    {% assign other_edition = site.posts | where: 'translation_key', page.translation_key | where: 'lang', 'en' | first %}
+  {% else %}
+    {% assign other_edition = site.notebook_zh | where: 'translation_key', page.translation_key | first %}
+  {% endif %}
+{% endif %}
+{% if other_edition %}
+<link rel="stylesheet" href="{{ '/assets/css/language-switch.css' | relative_url }}">
+<p class="lang-toggle-row">
+  <a class="lang-toggle{% if page.lang == 'zh-CN' %} is-zh{% endif %}" href="{{ other_edition.url | relative_url }}" hreflang="{% if page.lang == 'zh-CN' %}en{% else %}zh-CN{% endif %}" aria-label="{% if page.lang == 'zh-CN' %}Read this entry in English{% else %}阅读中文版{% endif %}">
+    <span class="lang-toggle__label lang-toggle__en">EN</span>
+    <span class="lang-toggle__slider" aria-hidden="true"></span>
+    <span class="lang-toggle__label lang-toggle__zh">中</span>
+  </a>
+</p>
+<script src="{{ '/assets/js/language-toggle.js' | relative_url }}" defer></script>
+{% endif %}

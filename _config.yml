@@ -324,6 +324,12 @@ compress_html:
     envs: development
 
 
+# Chinese editions of notebook entries, written by _tools/obsidian/publish_note.rb --publish-source.
+collections:
+  notebook_zh:
+    output: true
+    permalink: /blog/:name/
+
 # Defaults
 defaults:
   # _posts

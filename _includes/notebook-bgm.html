@@ -1,0 +1,11 @@
+{% assign bgm = site.data.notebook_bgm[page.slug] %}
+{% if bgm and bgm.provider == 'youtube' %}
+<link rel="stylesheet" href="{{ '/assets/css/notebook-bgm.css' | relative_url }}">
+<aside class="nb-bgm" data-provider="youtube" data-id="{{ bgm.id | escape }}" aria-label="BGM">
+  <button type="button" class="nb-bgm__play" aria-expanded="false" hidden><span class="nb-bgm__icon" aria-hidden="true"></span></button>
+  <p class="nb-bgm__meta"><span class="nb-bgm__label">BGM</span><strong class="nb-bgm__title">{{ bgm.title | escape }}</strong><span class="nb-bgm__artist">{{ bgm.artist | escape }}</span></p>
+  <a class="nb-bgm__link" href="https://www.youtube.com/watch?v={{ bgm.id | url_encode }}" rel="noopener">YouTube</a>
+  <div class="nb-bgm__frame" hidden></div>
+</aside>
+<script src="{{ '/assets/js/notebook-bgm.js' | relative_url }}" defer></script>
+{% endif %}

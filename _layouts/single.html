@@ -3,6 +3,7 @@ layout: default
 ---
 
 {% assign research_visualization = site.data.research_visualizations[page.slug] %}
+{% assign notebook_bgm = site.data.notebook_bgm[page.slug] %}
 {% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
   {% include page__hero.html %}
 {% elsif page.header.video.id and page.header.video.provider %}
@@ -28,6 +29,8 @@ layout: default
     {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
 
     <div class="page__inner-wrap">
+      {% if notebook_bgm %}{% include notebook-bgm.html %}{% endif %}
+      {% include language-toggle.html %}
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
           {% if page.title -%}
@@ -53,6 +56,7 @@ layout: default
         {% endif %}
         {{ content }}
         {% if research_visualization %}{% include research-visualization.html %}{% endif %}
+        {% if content contains 'data-nb-chart' %}{% include notebook-charts.html %}{% endif %}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
 

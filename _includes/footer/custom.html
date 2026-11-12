@@ -73,7 +73,13 @@
     var tab = tabFromHash(target.hash);
     if (!tab || !sameDocument(target)) return;
     event.preventDefault();
-    setMode(true, tab);
+    // Slide like a pager when moving between the Life tabs.
+    var lifeLinks = Array.prototype.slice.call(lifeNav.querySelectorAll('a'));
+    var fromIndex = lifeLinks.findIndex(function (item) { return item.getAttribute('aria-current') === 'page'; });
+    var toIndex = lifeLinks.indexOf(link);
+    var switchTab = function () { setMode(true, tab); };
+    if (window.tabSlide && fromIndex >= 0 && toIndex !== fromIndex) window.tabSlide(toIndex > fromIndex ? 'forward' : 'back', switchTab);
+    else switchTab();
     updateHash(target.hash);
   });
   document.addEventListener('click', function (event) {
