@@ -8,7 +8,7 @@
   {% endif %}
 {% endif %}
 {% if other_edition %}
-<link rel="stylesheet" href="{{ '/assets/css/language-switch.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/language-switch.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 <p class="lang-toggle-row">
   <a class="lang-toggle{% if page.lang == 'zh-CN' %} is-zh{% endif %}" href="{{ other_edition.url | relative_url }}" hreflang="{% if page.lang == 'zh-CN' %}en{% else %}zh-CN{% endif %}" aria-label="{% if page.lang == 'zh-CN' %}Read this entry in English{% else %}阅读中文版{% endif %}">
     <span class="lang-toggle__label lang-toggle__en">EN</span>
@@ -16,5 +16,5 @@
     <span class="lang-toggle__label lang-toggle__zh">中</span>
   </a>
 </p>
-<script src="{{ '/assets/js/language-toggle.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/language-toggle.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 {% endif %}
