@@ -20,7 +20,7 @@ excerpt: "Where the EA888 came from, why its second generation became famous for
 
 My car is a Canadian-market 2024 Golf GTI, and its engine is an EA888 evo4. Before taking it apart, a few words on where this engine comes from.
 
-## Starting with the history
+## A bite from the history
 
 > The story before the fourth generation comes from public sources and what is commonly said among enthusiasts. The Volkswagen documents I have don't cover it, and different sources put the years a year or two apart.
 

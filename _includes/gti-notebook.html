@@ -1,17 +1,23 @@
 <div class="gti-notebook">
   <section class="gti-cover" aria-labelledby="gti-cover-title">
-    <img class="gti-cover__photo" src="{{ '/assets/gti/gti-mark8.jpg' | relative_url }}" alt="My black Golf GTI Mark 8, parked on autumn leaves" width="1500" height="1125" loading="lazy" decoding="async">
-    <figure class="gti-epigraph">
-      <blockquote><p>If you drive a GTI, you’re going to get to where you’re going more quickly, which means you’re going to meet more people, have more experiences, learn more stuff. Speed makes you cleverer.</p></blockquote>
-      <figcaption>Jeremy Clarkson</figcaption>
-    </figure>
-    <div class="gti-cover__title">
-      <p class="gti-cover__kicker"><span>Life</span><span>GTI notebook</span></p>
-      <h2 class="gti-cover__name" id="gti-cover-title">GTI Mark 8</h2>
+    <div class="gti-cover__frame">
+      <picture>
+        <source media="(min-width: 581px)" srcset="{{ '/assets/gti/gti-mark8-band.jpg' | relative_url }} 1080w, {{ '/assets/gti/gti-mark8-band-2x.jpg' | relative_url }} 1800w" sizes="(min-width: 1152px) 1080px, calc(100vw - 52px)" width="1080" height="571">
+        <img class="gti-cover__photo" src="{{ '/assets/gti/gti-mark8.jpg' | relative_url }}" alt="My black Golf GTI Mark 8, parked on autumn leaves" width="1080" height="810" loading="lazy" decoding="async">
+      </picture>
     </div>
-    <button class="gti-cover__cue" type="button" aria-label="Scroll down to the chapters" onclick="var t=document.getElementById('gti-notebook-start');if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></svg></button>
+    <div class="gti-cover__words">
+      <figure class="gti-epigraph">
+        <blockquote><p>If you drive a GTI, you’re going to get to where you’re going more quickly, which means you’re going to meet more people, have more experiences, learn more stuff. Speed makes you cleverer.</p></blockquote>
+        <figcaption>Jeremy Clarkson</figcaption>
+      </figure>
+      <div class="gti-cover__title">
+        <p class="gti-cover__kicker"><span>Life</span><span>GTI notebook</span></p>
+        <h2 class="gti-cover__name" id="gti-cover-title">GTI Mark 8</h2>
+      </div>
+    </div>
   </section>
-  <p class="gti-lead" id="gti-notebook-start">Understanding the car, one system at a time.<br>Factory technical documents first, followed by interactive mechanical explanations.</p>
+  <p class="gti-lead">Understanding the car, one system at a time.<br>Factory technical documents first, followed by interactive mechanical explanations.</p>
   <div class="gti-feature">
     <p class="gti-eyebrow">01 / Powertrain</p>
     <h3><a href="{{ '/en/life/gti/ea888-evo4/' | relative_url }}">The engine, layer by layer</a></h3>
