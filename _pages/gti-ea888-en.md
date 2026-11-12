@@ -1,5 +1,5 @@
 ---
-title: "EA888 evo4: the engine, layer by layer"
+title: "The engine, layer by layer"
 layout: single
 permalink: /en/life/gti/ea888-evo4/
 lang: en
