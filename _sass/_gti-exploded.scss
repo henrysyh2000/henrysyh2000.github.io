@@ -324,6 +324,87 @@
 .gti-epigraph figcaption { margin: 8px 0 0 18px; color: var(--site-secondary, #5b6572); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
 .gti-epigraph figcaption::before { content: "— "; }
 
+// The owner's photo fills the first screen of the GTI section, edge to edge under the sticky masthead: the epigraph
+// sits on it at the top left, the column name and the title at the bottom right; the chapters follow below. The Life
+// view is made a size container so the cover can span the full width (100cqw) without a horizontal scrollbar.
+.mode-content--life:has(.gti-cover) { container-type: inline-size; }
+.gti-cover {
+  --gti-top: 77px; // height of the sticky masthead
+  --gti-inset: clamp(24px, 4.5cqw, 72px); // the text sits in the photo's corners
+  position: relative;
+  width: 100cqw;
+  height: calc(100vh - var(--gti-top));
+  height: calc(100svh - var(--gti-top));
+  min-height: 460px;
+  margin: -64px 0 56px calc(50% - 50cqw);
+  overflow: hidden;
+  background: #1b1f26;
+}
+// Option C on the design canvas (chosen 2026-11-12): the quote leads, the title is small. The car sits a little low in
+// the frame, so the quote has the trees above it.
+.gti-cover__photo { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+// a soft shade only in the two corners that carry text, deeper behind the quote; the car is left as photographed
+.gti-cover::after {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(95% 80% at 0% 0%, rgba(10, 14, 22, .82), rgba(10, 14, 22, .5) 45%, rgba(10, 14, 22, 0) 100%),
+    radial-gradient(70% 55% at 100% 100%, rgba(10, 14, 22, .72), rgba(10, 14, 22, .36) 45%, rgba(10, 14, 22, 0) 100%);
+  content: "";
+  pointer-events: none;
+}
+.gti-cover .gti-epigraph { position: absolute; z-index: 1; top: clamp(24px, 5.5svh, 56px); left: var(--gti-inset); max-width: min(640px, calc(100% - 2 * var(--gti-inset))); margin: 0; }
+.gti-cover .gti-epigraph blockquote { padding-left: 22px; color: #fff; border-inline-start-color: rgba(255, 255, 255, .85); font-size: clamp(19px, 2.1cqw, 28px); line-height: 1.5; text-shadow: 0 1px 3px rgba(0, 0, 0, .5), 0 0 30px rgba(0, 0, 0, .5); }
+.gti-cover .gti-epigraph figcaption { margin: 12px 0 0 24px; color: rgba(255, 255, 255, .9); font-size: 13px; letter-spacing: .1em; text-shadow: 0 1px 3px rgba(0, 0, 0, .4); }
+.gti-cover__title { position: absolute; z-index: 1; right: var(--gti-inset); bottom: clamp(28px, 5svh, 52px); text-align: right; text-shadow: 0 1px 3px rgba(0, 0, 0, .4); }
+// the column name, styled here in full so the cover does not depend on the notebook header styles
+.gti-cover p.gti-cover__kicker { display: flex; justify-content: flex-end; gap: 9px; margin: 0 0 8px; color: rgba(255, 255, 255, .9); font-size: 11px; line-height: 1.6; letter-spacing: .16em; text-transform: uppercase; }
+.gti-cover__kicker span:first-child { color: #fff; }
+.gti-cover__kicker > * + *::before { margin-right: 9px; color: #fff; opacity: .6; content: "/"; }
+.gti-cover h2.gti-cover__name { margin: 0; color: #fff; font: 400 clamp(36px, 3.8cqw, 52px)/1.1 Charter, "Iowan Old Style", Georgia, serif; text-shadow: 0 1px 14px rgba(0, 0, 0, .35); }
+// the cue: a small round button at the bottom that scrolls to the chapters (no hash change: the Life tabs use the hash)
+.gti-cover button.gti-cover__cue {
+  position: absolute;
+  z-index: 1;
+  bottom: 18px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 0 0 -22px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 50%;
+  background: rgba(10, 14, 22, .32); // a light dark disc so it reads on the bright leaves
+  box-shadow: none;
+  color: #fff;
+  cursor: pointer;
+}
+.gti-cover button.gti-cover__cue:hover { background: rgba(10, 14, 22, .5); }
+.gti-cover button.gti-cover__cue:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.gti-cover__cue svg { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .gti-cover__cue svg { animation: gti-cue 2.4s ease-in-out infinite; }
+}
+@keyframes gti-cue {
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(3px); }
+}
+#gti-notebook-start { scroll-margin-top: 110px; } // clear of the sticky masthead
+@media (max-width: 800px) {
+  .gti-cover { margin-top: -48px; }
+}
+@media (max-width: 580px) {
+  .gti-cover { --gti-top: 98px; --gti-inset: 23px; margin-top: -34px; } // the masthead takes two rows here
+  .gti-cover button.gti-cover__cue { left: var(--gti-inset); margin-left: 0; } // the title holds the bottom right
+}
+// on a portrait screen the cover keeps the front of the car
+@media (max-aspect-ratio: 1 / 1) {
+  .gti-cover__photo { object-position: 86% 60%; }
+}
+
 // Official reference image near the top of the chapter.
 .gti-reference { max-width: 360px; margin: 26px auto 30px; text-align: center; }
 .gti-reference img { display: block; width: 100%; height: auto; margin: 0 auto; }
