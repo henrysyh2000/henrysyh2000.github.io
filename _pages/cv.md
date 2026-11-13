@@ -20,10 +20,9 @@ author_profile: false
   </ol>
 </section>
 
-<section class="cv-section" aria-labelledby="cv-research">
-  <h2 id="cv-research">Research</h2>
+<section class="cv-section" aria-labelledby="cv-publications">
+  <h2 id="cv-publications">Publications</h2>
   <ol class="cv-list">
-    <li><span class="cv-when">2026 – present</span><div class="cv-what"><h3>Feasibility Probe for Interdisciplinary Research: Validation Platform</h3><p class="cv-note">Work in progress.</p></div></li>
     <li><span class="cv-when">2025 – 2026</span><div class="cv-what"><h3>On the Diversity of Analogy Making in Large Language Models</h3><p class="cv-note">Submitted to ICLR 2027, under review.</p></div></li>
     <li><span class="cv-when">2024 – 2025</span><div class="cv-what"><h3>IDRBench: Understanding the Capability of Large Language Models on Interdisciplinary Research</h3><p class="cv-note">ICML 2025 Assessing World Models Workshop; ICML 2026 Main Conference.</p></div></li>
     <li><span class="cv-when">2023 – 2024</span><div class="cv-what"><h3>SMARTCAL: An Approach to Self-Aware Tool-Use Evaluation and Calibration</h3><p class="cv-note">EMNLP 2024 Industry Track.</p></div></li>
