@@ -21,4 +21,7 @@ life:
     url: "#travel"
   - title: "GTI Mark 8"
     url: "#gti-mark-8"
+  # an outside link: it leaves this site
+  - title: "Secret base"
+    url: "https://mini.tail8cb277.ts.net"
 
