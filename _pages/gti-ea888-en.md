@@ -1,5 +1,5 @@
 ---
-title: "The engine, layer by layer"
+title: "Combustion is art"
 layout: single
 permalink: /en/life/gti/ea888-evo4/
 lang: en
