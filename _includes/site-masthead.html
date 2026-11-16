@@ -9,7 +9,7 @@
             {% if page.url == '/' %}{% assign current_link = true %}{% endif %}
           {% elsif page.url contains link.url %}
             {% assign current_link = true %}
-          {% elsif link.url == '/blog/' and page.collection == 'posts' %}
+          {% elsif link.url == '/notebook/' and page.collection == 'posts' %}
             {% assign current_link = true %}
           {% endif %}
           <li><a href="{{ link.url | relative_url }}"{% if current_link %} aria-current="page"{% endif %}>{{ link.title | escape }}</a></li>

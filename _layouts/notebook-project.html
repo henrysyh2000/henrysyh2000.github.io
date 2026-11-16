@@ -1,0 +1,32 @@
+---
+layout: archive
+---
+{% assign project = site.data.notebook.projects | where: 'key', page.project | first %}
+{% assign entries = site.posts | where: 'series', project.series | where_exp: 'post', 'post.hidden != true' | sort: 'title' %}
+
+<header class="notebook-head">
+  <p class="notebook-head__kicker"><a href="{{ '/notebook/' | relative_url }}">Notebook</a><span>{{ project.title }}</span></p>
+  <p class="notebook-head__lead">{{ project.question }}</p>
+  <dl class="notebook-head__meta">
+    <div><dt>Year</dt><dd>{{ project.years }}</dd></div>
+    <div><dt>Status</dt><dd>{{ project.status }}</dd></div>
+    <div><dt>Entries</dt><dd>{{ entries.size }}</dd></div>
+  </dl>
+</header>
+
+{{ content }}
+
+<ol class="notebook-log notebook-entries">
+  {% for post in entries %}
+    {% capture number %}{% include notebook-entry-number.html title=post.title %}{% endcapture %}
+    {% assign heading = post.title | split: ': ' | shift | join: ': ' %}
+    <li>
+      <span class="notebook-log__index">{{ number | strip }}</span>
+      <span class="notebook-log__body">
+        <a href="{{ post.url | relative_url }}">{{ heading | default: post.title | escape }}</a>
+        {% if post.excerpt %}<small>{{ post.excerpt | strip_html | truncate: 170 }}</small>{% endif %}
+      </span>
+      <time class="notebook-entries__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%b %-d' }}</time>
+    </li>
+  {% endfor %}
+</ol>

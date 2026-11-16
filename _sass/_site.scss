@@ -1,10 +1,21 @@
 // Shared typography, colors, navigation and spacing for the whole site.
+// Registered so the accent can glide between the Research and Life inks.
+@property --site-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1d428a;
+}
+
 .site-design {
   --site-background: #fbfcfd;
   --site-ink: #243246;
   --site-secondary: #5b6572;
   --site-line: #dfe5ec;
   --site-accent: #1d428a;
+  transition: --site-accent 520ms ease;
+
+  // Life keeps the same blue ink as Research: the owner asked for blue, not yellow, as the site's main colour (2026-11-09).
+  &[data-mode="life"] { --site-accent: #1d428a; }
 
   color: var(--site-ink);
   background: var(--site-background);
@@ -59,33 +70,76 @@
     text-decoration: underline;
     text-underline-offset: 7px;
   }
+  // Research / Life switch: a small instrument lever. The frame never moves;
+  // only the accent ink and the knob change.
   .mode-toggle {
-    gap: 5px;
+    gap: 8px;
     font-family: inherit;
     border-radius: 3px;
+    user-select: none;
   }
   .mode-toggle:focus-within {
     outline: 2px solid var(--site-accent);
     outline-offset: 5px;
   }
   .mode-toggle__label {
+    color: var(--site-secondary);
     font-size: 12px;
     text-transform: none;
-    letter-spacing: 0;
+    letter-spacing: 0.02em;
+    transition: color 320ms ease;
   }
   .mode-toggle__slider {
-    width: 28px;
-    height: 16px;
-    background: var(--site-accent);
+    width: 34px;
+    height: 18px;
+    background: transparent;
+    border: 1px solid var(--site-accent);
+    border-radius: 9px;
+    transition: none;
   }
   .mode-toggle__slider::before {
-    width: 10px;
-    height: 10px;
-    bottom: 3px;
+    left: 3px;
+    bottom: 2px;
+    width: 12px;
+    height: 12px;
+    background: var(--site-accent);
+    border-radius: 6px;
+    transition: transform 460ms cubic-bezier(0.34, 1.45, 0.5, 1);
   }
-  .mode-toggle input:checked ~ .mode-toggle__slider::before { transform: translateX(12px); }
+  .mode-toggle__slider::after {
+    // tick marks: a quiet nod to a measuring instrument
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 6px;
+    content: "";
+    background: var(--site-accent);
+    opacity: 0.28;
+    transform: translate(-50%, -50%);
+  }
+  .mode-toggle input:checked ~ .mode-toggle__slider { background: transparent; }
+  .mode-toggle:hover .mode-toggle__slider::before { box-shadow: 0 0 0 3px color-mix(in srgb, var(--site-accent) 14%, transparent); }
+  .mode-toggle input:checked ~ .mode-toggle__slider::before { transform: translateX(16px); }
+  .mode-toggle.is-switching .mode-toggle__slider::before { animation: mode-knob-stretch 460ms cubic-bezier(0.3, 0.7, 0.3, 1); }
   .mode-toggle input:not(:checked) ~ .mode-toggle__label--research,
-  .mode-toggle input:checked ~ .mode-toggle__label--life { color: var(--site-accent); }
+  .mode-toggle input:checked ~ .mode-toggle__label--life { color: var(--site-ink); }
+
+  // A one-pixel line of the new accent sweeps the masthead's bottom edge.
+  .site-masthead::after {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 1px;
+    content: "";
+    background: var(--site-accent);
+    transform: scaleX(0);
+    transform-origin: right center;
+    pointer-events: none;
+  }
+  &[data-mode="life"] .site-masthead::after { transform-origin: left center; }
+  .site-masthead.is-sweeping::after { animation: mode-sweep 760ms cubic-bezier(0.65, 0, 0.35, 1); }
 
   #main.home-page {
     max-width: 1152px;
@@ -263,6 +317,8 @@
     h3 a:hover { text-decoration: underline; }
     p { color: var(--site-secondary); font-size: 14px; line-height: 1.9; }
   }
+  .home-notebook__year { margin-left: 6px; color: var(--site-secondary); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .home-notebook__latest { margin-bottom: 8px; }
   .home-notebook__languages { display: flex; flex-wrap: wrap; gap: 22px; font-size: 13px; }
   .home-background {
     padding: 29px 0 6px;
@@ -292,9 +348,21 @@
   }
 }
 
+@keyframes mode-knob-stretch {
+  40% { width: 18px; }
+  100% { width: 12px; }
+}
+@keyframes mode-sweep {
+  0% { transform: scaleX(0); opacity: 1; }
+  55% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .site-design { transition: none; }
   .site-design .mode-toggle span { transition: none; }
-  .site-design .mode-toggle__slider::before { transition: none; }
+  .site-design .mode-toggle__slider::before { transition: none; animation: none !important; }
+  .site-design .site-masthead::after { display: none; }
 }
 
 @media (max-width: 800px) {

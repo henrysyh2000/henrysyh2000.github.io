@@ -1,0 +1,42 @@
+---
+layout: archive
+---
+
+<header class="notebook-head">
+  <p class="notebook-head__kicker"><span>Research</span><span>Notebook</span></p>
+  <p class="notebook-head__lead">{{ page.description }}</p>
+</header>
+
+<ol class="notebook-projects">
+  {% assign shown_projects = site.data.notebook.projects | where_exp: 'project', 'project.hidden != true' %}
+  {% for project in shown_projects %}
+    {% assign entries = site.posts | where: 'series', project.series | where_exp: 'post', 'post.hidden != true' %}
+    {% if project.series == nil %}{% assign entries = '' | split: '' %}{% endif %}
+    <li class="notebook-project{% if project.url == nil %} is-planned{% endif %}">
+      {% if project.url %}<a class="notebook-project__link" href="{{ project.url | relative_url }}">{% else %}<div class="notebook-project__link">{% endif %}
+        <span class="notebook-project__years">{{ project.years }}</span>
+        <span class="notebook-project__body">
+          <span class="notebook-project__title">{{ project.title }}</span>
+          {% if project.question %}<span class="notebook-project__question">{{ project.question }}</span>
+          {% else %}<span class="notebook-project__question">Notes begin in {{ project.years }}.</span>{% endif %}
+        </span>
+        <span class="notebook-project__meta">
+          <span class="notebook-log__status{% if project.status == 'In progress' %} is-active{% endif %}">{{ project.status }}</span>
+          {% if entries.size > 0 %}<span class="notebook-project__count">{{ entries.size }} entries</span>{% endif %}
+        </span>
+      {% if project.url %}</a>{% else %}</div>{% endif %}
+    </li>
+  {% endfor %}
+</ol>
+
+{% assign other_posts = site.posts | where_exp: 'post', 'post.series == nil' | where_exp: 'post', 'post.hidden != true' | where_exp: 'post', "post.lang == 'en' or post.lang == nil" %}
+{% if other_posts.size > 0 %}
+<section class="notebook-earlier" aria-labelledby="notebook-earlier-title">
+  <h2 id="notebook-earlier-title">Earlier writing</h2>
+  <ul>
+    {% for post in other_posts %}
+      <li><a href="{{ post.url | relative_url }}">{{ post.title | split: ' · ' | last | escape }}</a> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%b %Y' }}</time></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}

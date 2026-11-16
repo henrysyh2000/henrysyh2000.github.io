@@ -10,8 +10,8 @@ main:
     url: /
   - title: "Publications"
     url: /publications/
-  - title: "Blog"
-    url: /blog/
+  - title: "Notebook"
+    url: /notebook/
   - title: "CV"
     url: /cv/
 

@@ -1,12 +1,8 @@
 ---
-title: Henry’s Research Notebook
-description: Questions from research, observations from experiments, and ideas that become clearer along the way.
+title: Analogy Diversity
+layout: english-redirect
 permalink: /en/blog/columns/research-notebook/
-layout: blog-index
-author_profile: false
-series: research-notebook
-lang: en
-locale: en
+redirect_to: /notebook/analogy-diversity/
+redirect_note: The blog is now the Notebook.
+sitemap: false
 ---
-
-Questions from research, observations from experiments, and ideas that become clearer along the way.

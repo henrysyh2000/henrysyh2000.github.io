@@ -197,6 +197,90 @@
   .travel-moment p { margin: 0; color: var(--site-secondary); font-size: 13px; line-height: 1.85; }
 
   .gti-notebook { max-width: 900px; margin: 0 auto; }
+
+  // Shared notebook grammar: the same header and log for Research and Life.
+  .notebook-head { margin-bottom: 36px; }
+  .notebook-head h2 { margin: 0 0 18px; font: 400 clamp(30px, 3.5vw, 44px)/1.28 Charter, "Iowan Old Style", Georgia, serif; }
+  .notebook-head__kicker {
+    display: flex;
+    gap: 10px;
+    margin: 0 0 14px;
+    color: var(--site-secondary);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    span:first-child { color: var(--site-accent); }
+    > * + *::before { margin-right: 10px; color: var(--site-secondary); opacity: 0.45; content: "/"; }
+  }
+  .notebook-head__lead { max-width: 58ch; margin: 0; color: var(--site-secondary); font-size: 16px; line-height: 1.85; }
+  .notebook-head__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 36px;
+    margin: 26px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--site-line);
+    font-size: 12px;
+    div { display: grid; gap: 2px; }
+    dt { color: var(--site-secondary); font-size: 10.5px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; }
+    dd { margin: 0; color: var(--site-ink); font-variant-numeric: tabular-nums; }
+  }
+  .notebook-head__kicker a { color: var(--site-accent); text-decoration: none; }
+  .notebook-head__kicker a:hover { text-decoration: underline; }
+
+  // Notebook: projects, then entries.
+  .notebook-projects { margin: 8px 0 0; padding: 0; list-style: none; }
+  .notebook-project { margin: 0; border-top: 1px solid var(--site-line); }
+  .notebook-project:last-child { border-bottom: 1px solid var(--site-line); }
+  .notebook-project__link {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: baseline;
+    padding: 26px 0;
+    color: var(--site-ink);
+    text-decoration: none;
+  }
+  .notebook-project__years { color: var(--site-secondary); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .notebook-project__title { display: block; font: 400 26px/1.3 Charter, "Iowan Old Style", Georgia, serif; letter-spacing: -0.3px; }
+  .notebook-project__question { display: block; margin-top: 8px; color: var(--site-secondary); font-size: 15px; line-height: 1.7; }
+  .notebook-project__meta { display: grid; justify-items: end; gap: 6px; }
+  .notebook-project__count { color: var(--site-secondary); font-size: 12px; font-variant-numeric: tabular-nums; }
+  a.notebook-project__link:hover .notebook-project__title { color: var(--site-accent); }
+  .notebook-project.is-planned .notebook-project__title { color: var(--site-secondary); }
+  .notebook-earlier { margin-top: 56px; }
+  .notebook-earlier h2 { margin: 0 0 12px; font-size: 13px; font-weight: 400; color: var(--site-secondary); letter-spacing: 0.12em; text-transform: uppercase; }
+  .notebook-earlier ul { margin: 0; padding: 0; list-style: none; font-size: 15px; }
+  .notebook-earlier time { margin-left: 10px; color: var(--site-secondary); font-size: 12px; }
+  .notebook-entries .notebook-log__body a { color: var(--site-ink); font-size: 17px; text-decoration: none; }
+  .notebook-entries .notebook-log__body a:hover { color: var(--site-accent); text-decoration: underline; }
+  .notebook-entries__date { color: var(--site-secondary); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .notebook-crumb { color: var(--site-secondary); }
+  .notebook-crumb span[aria-hidden] { margin: 0 8px; opacity: 0.45; }
+
+  .notebook-log { margin: 22px 0 0; padding: 0; list-style: none; }
+  .notebook-log li {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: baseline;
+    padding: 17px 0;
+    border-top: 1px solid var(--site-line);
+    font-size: 15px;
+  }
+  .notebook-log__index { color: var(--site-secondary); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .notebook-log__body small { display: block; margin-top: 6px; color: var(--site-secondary); font-size: 13px; line-height: 1.8; }
+  .notebook-log__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--site-secondary);
+    font-size: 11px;
+    white-space: nowrap;
+    &::before { width: 7px; height: 7px; border: 1px solid currentColor; border-radius: 50%; content: ""; }
+    &.is-active { color: var(--site-accent); }
+    &.is-active::before { background: currentColor; }
+  }
   .gti-notebook > h2 { margin: 0 0 22px; font: 400 clamp(30px, 3.5vw, 44px)/1.28 Charter, "Iowan Old Style", Georgia, serif; }
   .gti-eyebrow, .gti-chapter-kicker { color: var(--site-secondary); font-size: 12px; line-height: 1.6; }
   .gti-lead { max-width: 50ch; font-size: 19px; line-height: 1.8; }
@@ -207,8 +291,6 @@
   .gti-links { display: flex; flex-wrap: wrap; gap: 12px 25px; margin: 24px 0 0; font-size: 13px; }
   .gti-feature img { display: block; width: 100%; height: auto; margin-top: 15px; }
   .gti-roadmap h3 { font-size: 19px; font-weight: 500; }
-  .gti-roadmap ol { padding-inline-start: 22px; margin: 22px 0 0; }
-  .gti-roadmap li { padding: 0 0 20px 8px; font-size: 15px; }
   .gti-roadmap small { display: block; margin-top: 7px; color: var(--site-secondary); font-size: 13px; line-height: 1.8; }
   .gti-document-links { display: grid; gap: 10px; padding: 20px 22px; margin-block: 25px; border: 1px solid var(--site-line); border-radius: 3px; font-size: 14px; }
   .gti-anatomy { display: block; width: 100%; height: 760px; border: 0; margin: 28px 0 0; }
@@ -270,5 +352,16 @@
     .travel-atlas__regions { gap: 6px 15px; }
     .travel-atlas__regions button { font-size: 11px; }
     .travel-photo-notes { grid-template-columns: minmax(0, 1fr); }
+  }
+}
+
+@media (max-width: 580px) {
+  .site-design {
+    .notebook-head__meta { gap: 12px 24px; }
+    .notebook-log li { grid-template-columns: 26px minmax(0, 1fr); gap: 6px 12px; }
+    .notebook-log li > .notebook-log__status, .notebook-entries__date { grid-column: 2; }
+    .notebook-project__link { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    .notebook-project__meta { justify-items: start; grid-auto-flow: column; justify-content: start; gap: 16px; }
+    .notebook-project__title { font-size: 23px; }
   }
 }

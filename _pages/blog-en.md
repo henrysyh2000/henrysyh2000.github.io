@@ -1,11 +1,8 @@
 ---
-title: Technical Blog
-description: Technical explorations, lessons from experiments, and reflections on research.
+title: Notebook
+layout: english-redirect
 permalink: /en/blog/
-layout: blog-index
-author_profile: false
-lang: en
-locale: en
+redirect_to: /notebook/
+redirect_note: The blog is now the Notebook.
+sitemap: false
 ---
-
-Technical explorations, lessons from experiments, and reflections on research.

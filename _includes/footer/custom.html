@@ -15,7 +15,11 @@
     var data = event.data;
     if (!data || data.type !== 'gti-anatomy-height' || !Number.isFinite(data.height)) return;
     document.querySelectorAll('iframe.gti-anatomy').forEach(function (frame) {
-      if (event.source === frame.contentWindow) frame.style.height = Math.max(420, Math.min(1800, data.height)) + 'px';
+      if (event.source === frame.contentWindow && event.origin === window.location.origin) {
+        var requestedLimit = Number(frame.getAttribute('data-max-height')) || 1800;
+        var limit = Math.max(1800, Math.min(3500, requestedLimit));
+        frame.style.height = Math.max(420, Math.min(limit, data.height + 6)) + 'px';
+      }
     });
   });
 
@@ -41,6 +45,7 @@
   }
   function setMode(isLife, tab) {
     if (toggle) toggle.checked = isLife;
+    document.body.setAttribute('data-mode', isLife ? 'life' : 'research');
     if (researchNav) researchNav.style.display = isLife ? 'none' : '';
     if (lifeNav) lifeNav.style.display = isLife ? '' : 'none';
     if (isLife) showLifeTab(tab || currentLifeTab);
@@ -48,6 +53,55 @@
       if (researchContent) researchContent.style.display = '';
       if (lifeContent) lifeContent.style.display = 'none';
     }
+  }
+  // The lens change: the frame stays, the accent ink glides, a hairline sweeps
+  // the masthead, and the content steps out of focus and back in.
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var stage = document.querySelector('.initial-content');
+  var masthead = document.querySelector('.site-masthead');
+  var toggleLabel = toggle ? toggle.closest('.mode-toggle') : null;
+  var switching = null;
+  function replay(element, className) {
+    if (!element) return;
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+    window.setTimeout(function () { element.classList.remove(className); }, 800);
+  }
+  function lensSwitch(isLife, tab, done) {
+    if (reduceMotion.matches || !stage || !stage.animate) {
+      setMode(isLife, tab);
+      if (done) done();
+      return;
+    }
+    if (switching) switching.cancel();
+    replay(toggleLabel, 'is-switching');
+    replay(masthead, 'is-sweeping');
+    var navs = [researchNav, lifeNav].filter(Boolean);
+    switching = stage.animate(
+      [{ opacity: 1, transform: 'none', filter: 'blur(0)' },
+       { opacity: 0, transform: 'translateY(-4px)', filter: 'blur(3px)' }],
+      { duration: 170, easing: 'cubic-bezier(0.4, 0, 1, 1)', fill: 'forwards' });
+    navs.forEach(function (nav) {
+      nav.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150, fill: 'forwards' });
+    });
+    switching.onfinish = function () {
+      setMode(isLife, tab);
+      if (done) done();
+      if (window.scrollY > 0) window.scrollTo(0, 0);
+      switching = stage.animate(
+        [{ opacity: 0, transform: 'translateY(10px)', filter: 'blur(3px)' },
+         { opacity: 1, transform: 'none', filter: 'blur(0)' }],
+        { duration: 440, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)', fill: 'forwards' });
+      switching.onfinish = function () { switching.cancel(); switching = null; };
+      navs.forEach(function (nav) {
+        nav.getAnimations().forEach(function (a) { a.cancel(); });
+        nav.animate(
+          [{ opacity: 0, transform: 'translateX(' + (isLife ? '8px' : '-8px') + ')' },
+           { opacity: 1, transform: 'none' }],
+          { duration: 360, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)' });
+      });
+    };
   }
   function syncLocation() {
     var tab = tabFromHash(window.location.hash);
@@ -62,9 +116,11 @@
   window.addEventListener('hashchange', syncLocation);
   window.addEventListener('popstate', syncLocation);
   if (toggle) toggle.addEventListener('change', function () {
-    setMode(toggle.checked);
-    if (toggle.checked) updateHash('#' + currentLifeTab);
-    else if (tabFromHash(window.location.hash)) updateHash('');
+    var isLife = toggle.checked;
+    lensSwitch(isLife, null, function () {
+      if (isLife) updateHash('#' + currentLifeTab);
+      else if (tabFromHash(window.location.hash)) updateHash('');
+    });
   });
   if (lifeNav) lifeNav.addEventListener('click', function (event) {
     var link = event.target.closest('a');

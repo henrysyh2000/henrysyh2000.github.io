@@ -1,0 +1,18 @@
+# Notebook projects. Entries come from posts whose `series` matches `series`.
+# `hidden: true` keeps a project off the site.
+projects:
+  - key: analogy-diversity
+    title: Analogy Diversity
+    years: "2026"
+    status: In progress
+    question: Where does diversity in analogy generation come from?
+    url: /notebook/analogy-diversity/
+    series: research-notebook
+  - key: feasibility
+    hidden: true
+    title: Feasibility
+    years: "2027"
+    status: Planned
+    question:
+    url:
+    series:

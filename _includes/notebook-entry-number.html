@@ -1,0 +1,1 @@
+{% comment %}Entry number from a title like "Research Notebook 05: ...".{% endcomment %}{% assign nb_head = include.title | split: ':' | first %}{% assign nb_num = nb_head | remove: 'Research Notebook' | strip %}{{ nb_num }}

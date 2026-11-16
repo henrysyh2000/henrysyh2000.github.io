@@ -1,7 +1,8 @@
-{% assign column = nil %}
+{% assign nb_project = nil %}
 {% if include.article.series %}
-  {% assign column = site.data.blog-series[include.article.series][include.article.lang] %}
+  {% assign nb_project = site.data.notebook.projects | where: 'series', include.article.series | first %}
 {% endif %}
-{% if column %}
-  <p class="blog-series-label">{% if include.article.lang == 'zh-CN' %}专栏{% else %}Column{% endif %} · <a href="{{ column.url | relative_url }}">{{ column.title | escape }}</a></p>
+{% if nb_project %}
+  {% capture nb_number %}{% include notebook-entry-number.html title=include.article.title %}{% endcapture %}
+  <p class="blog-series-label notebook-crumb"><a href="{{ '/notebook/' | relative_url }}">Notebook</a><span aria-hidden="true">/</span><a href="{{ nb_project.url | relative_url }}">{{ nb_project.title | escape }}</a>{% assign nb_number = nb_number | strip %}{% if nb_number != include.article.title %}<span aria-hidden="true">/</span><span>No. {{ nb_number }}</span>{% endif %}</p>
 {% endif %}

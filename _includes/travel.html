@@ -1,9 +1,16 @@
 <div id="tab-travel" class="life-tab">
   <main class="travel-layout">
-    <header class="travel-overview">
-      <p class="travel-eyebrow">LIFE / TRAVEL</p>
+    {% assign travel_first = site.data.travel.years | last %}
+    {% assign travel_last = site.data.travel.years | first %}
+    <header class="travel-overview notebook-head">
+      <p class="notebook-head__kicker"><span>Life</span><span>Field notes</span></p>
       <h2 id="travel-overview-title">Places, over the years.</h2>
-      <p>Make the world my major. A few places I have spent time in, and small things I wanted to remember.</p>
+      <p class="notebook-head__lead">Make the world my major. A few places I have spent time in, and small things I wanted to remember.</p>
+      <dl class="notebook-head__meta">
+        <div><dt>Places</dt><dd>{{ site.data.travel.locations.size }}</dd></div>
+        <div><dt>Years</dt><dd>{{ site.data.travel.years.size }}</dd></div>
+        <div><dt>Span</dt><dd>{{ travel_first.year }}–{{ travel_last.year }}</dd></div>
+      </dl>
     </header>
 
     <section class="travel-atlas" data-travel-atlas aria-labelledby="travel-overview-title">

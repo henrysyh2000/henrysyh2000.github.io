@@ -9,7 +9,7 @@
     {% include head/custom.html %}
   </head>
 
-  <body class="site-design {% if page.collection == 'posts' or page.layout == 'blog-index' or page.layout == 'posts' %}blog-reading {% if page.toc %}blog-with-toc {% endif %}{% endif %}layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}" data-life-page="{{ page.life_page | escape }}" dir="{% if site.rtl %}rtl{% else %}ltr{% endif %}">
+  <body class="site-design {% if page.collection == 'posts' or page.layout == 'blog-index' or page.layout == 'posts' or page.layout == 'notebook-index' or page.layout == 'notebook-project' %}blog-reading {% if page.toc %}blog-with-toc {% endif %}{% endif %}layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}" data-life-page="{{ page.life_page | escape }}" dir="{% if site.rtl %}rtl{% else %}ltr{% endif %}">
     {% include_cached skip-links.html %}
     {% include site-masthead.html %}
 
